@@ -1,22 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import HomeScreen from './Screens/HomeScreen';
 
 function App() {
+  document.getElementsByTagName("html")[0].style.fontSize = window.screen.availWidth * 0.01 + "px";
   return (
-    <div>
-      <SubComponent text={"Welcome to you"}/>
-      <SubComponent text={"Welcome to Louie"}/>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/about">
+          <h1>About</h1>
+        </Route>
+        <Route exact path="/">
+          <HomeScreen/>
+        </Route>
+        <Route path="/*">
+          <h1>The URL does not exist</h1>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
-}
-
-function SubComponent(props){
-  return (
-    <h1>
-      {props.text}
-    </h1>
-  )
 }
 
 export default App;
