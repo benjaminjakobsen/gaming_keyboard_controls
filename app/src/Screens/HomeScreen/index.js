@@ -60,7 +60,9 @@ function HomeScreen(props){
       </div>
       <div style={{
         width : "100%",
-        height : "10000px"
+        height : "10000px",
+        background: "rgb(0,0,0)",
+        background: "linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0.2%, rgba(30,100,0,1) 100%)"
       }}>
         <LoginPanel/>
       </div>  
