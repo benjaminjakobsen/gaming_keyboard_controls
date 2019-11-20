@@ -3,6 +3,7 @@ import './index.css';
 import image from 'assets/home.jpg';
 import Menu from 'Components/Menu/index.js'
 import IntroductionPanel from './IntroductionPanel'
+import LoginPanel from './LoginPanel'
 
 function HomeScreen(props){
   const menuRef = useRef(null);
@@ -49,7 +50,7 @@ function HomeScreen(props){
       <div ref={menuRef} style={{
         backgroundColor : "black",
         color : "white",
-        height : "100px",
+        height : "12vh",
         width : "100%",
         position: "-webkit-sticky",
         position: "sticky",
@@ -61,7 +62,7 @@ function HomeScreen(props){
         width : "100%",
         height : "10000px"
       }}>
-        <IntroductionPanel/>
+        <LoginPanel/>
       </div>  
     </div>
 

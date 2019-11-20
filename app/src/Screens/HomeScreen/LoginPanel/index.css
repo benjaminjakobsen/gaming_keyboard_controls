@@ -1,0 +1,33 @@
+.LoginPanel-main-container{
+    display : flex;
+}
+
+.LoginPanel-input-container{
+    padding : 1vmax;
+    border-radius : 10px;
+    background-color : rgb(69, 150, 182);
+    margin : 5vh auto;
+    width : 50%;
+    color : white;
+}
+
+
+.LoginPanel-input-container input{
+    width : 60%;
+    float : right;
+    font-size: 1rem;
+    background-color: cadetblue;
+    border : 0;
+    color : white;
+}
+
+.LoginPanel-button{
+    padding : 1vmax 2vmax;
+    font-size : 1.1rem;
+    background-color : rgb(69, 150, 182);
+    border : 0;
+    color : white;
+    margin : 0 auto;
+    border-radius: 10px;
+    width : fit-content;
+}
