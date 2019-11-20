@@ -13,7 +13,7 @@ function LoginPanel(props){
 function CreateAccount(props){
   return (
     <form style={{
-      height : "88vh",
+      height : "83vh",
       flex : 1,
       paddingTop : "5vh"
     }}>
@@ -31,7 +31,7 @@ function CreateAccount(props){
 function Login(props){
   return (
     <form style={{
-      height : "88vh",
+      height : "83vh",
       paddingTop : "5vh",
       flex : 1,
     }} onSubmit={(e) => {
