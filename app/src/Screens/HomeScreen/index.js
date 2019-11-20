@@ -16,7 +16,8 @@ function HomeScreen(props){
         position : "relative"
       }}>
         <img src={image} style={{
-          height : "100%"
+          height : "100%",
+          minWidth :"100%"
         }}/>
         <div style={{
           color : "white",

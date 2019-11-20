@@ -5,10 +5,11 @@
 .LoginPanel-input-container{
     padding : 1vmax;
     border-radius : 10px;
-    background-color : rgb(69, 150, 182);
+    background-color : rgb(42, 88, 0);
     margin : 5vh auto;
     width : 50%;
     color : white;
+    height : 4vh;
 }
 
 
@@ -16,15 +17,19 @@
     width : 60%;
     float : right;
     font-size: 1rem;
-    background-color: cadetblue;
+    background-color: black;
     border : 0;
     color : white;
+    border-radius: 10px;
+    padding:5px;
+    height : fit-content;
+    margin : auto 0;
 }
 
 .LoginPanel-button{
     padding : 1vmax 2vmax;
     font-size : 1.1rem;
-    background-color : rgb(69, 150, 182);
+    background-color : black;
     border : 0;
     color : white;
     margin : 0 auto;
