@@ -2,6 +2,7 @@ import React, {useRef} from 'react';
 import './index.css';
 import image from 'assets/home.jpg';
 import Menu from 'Components/Menu/index.js'
+import IntroductionPanel from './IntroductionPanel'
 
 function HomeScreen(props){
   const menuRef = useRef(null);
@@ -14,7 +15,7 @@ function HomeScreen(props){
         position : "relative"
       }}>
         <img src={image} style={{
-          width : "100%"
+          height : "100%"
         }}/>
         <div style={{
           color : "white",
@@ -57,12 +58,11 @@ function HomeScreen(props){
         <Menu/>
       </div>
       <div style={{
+        width : "100%",
         height : "10000px"
       }}>
-        wdnkwd
-        wjdnwjdw
-        wjdnjwdnwd
-      </div>
+        <IntroductionPanel/>
+      </div>  
     </div>
 
   );
