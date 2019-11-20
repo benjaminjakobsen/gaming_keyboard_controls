@@ -6,12 +6,13 @@ import IntroductionPanel from './IntroductionPanel'
 import LoginPanel from './LoginPanel'
 
 function HomeScreen(props){
-  const menuRef = useRef(null);
+  const homeRef = useRef(null);
+  const introRef = useRef(null);
   const loginRef = useRef(null);
 
   return (
     <div className={"HomeScreen-main-container"}>
-      <div style={{
+      <div ref={homeRef} style={{
         width : "100vw",
         height : "100vh",
         overflow: "hidden",
@@ -43,14 +44,15 @@ function HomeScreen(props){
           borderRadius : "10px",
           cursor : "pointer"
         }} onClick={() => {
-          menuRef.current.scrollIntoView({ 
+          introRef.current.scrollIntoView({ 
             behavior: "smooth"
          });
         }}>
           Get Started
         </div>
       </div>
-      <div ref={menuRef} style={{
+      <div ref={introRef}/>
+      <div style={{
         backgroundColor : "black",
         color : "white",
         height : "12vh",
@@ -59,7 +61,23 @@ function HomeScreen(props){
         position: "sticky",
         top : "0"
       }}>
-        <Menu/>
+        <Menu buttonClickHandler={(page) => {
+          if(page === "Home"){
+            homeRef.current.scrollIntoView({
+              behavior: "smooth"
+            })
+          }
+          if(page === "Introduction"){
+            introRef.current.scrollIntoView({
+              behavior: "smooth"
+            })
+          }
+          if(page === "Login"){
+            loginRef.current.scrollIntoView({
+              behavior: "smooth"
+            })
+          }
+        }}/>
       </div>
       <div style={{
         width : "100%",
@@ -69,8 +87,9 @@ function HomeScreen(props){
         <IntroductionPanel buttonClickHandler={() => {
           loginRef.current.scrollIntoView({ 
             behavior: "smooth"
-         });
+        });
         }}/>
+        
         <div ref={loginRef}>
           <LoginPanel />
         </div>

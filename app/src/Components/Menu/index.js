@@ -9,9 +9,15 @@ function Menu(props){
       display : "flex",
       justifyContent: "space-around"
     }}>
-      <MenuItem>Home</MenuItem>
-      <MenuItem>About</MenuItem>
-      <MenuItem>Login</MenuItem>
+      <div onClick={() => props.buttonClickHandler("Home")}>
+        <MenuItem>Home</MenuItem>
+      </div>
+      <div onClick={() => props.buttonClickHandler("Introduction")}>
+        <MenuItem>Introduction</MenuItem>
+      </div>
+      <div onClick={() => props.buttonClickHandler("Login")}>
+        <MenuItem>Login</MenuItem>
+      </div>
     </div>
   );
 }
@@ -27,7 +33,8 @@ function MenuItem(props){
       position : "absolute",
       top : "50%", left : "50%",
       transform: "translate(-50%, -50%)",
-      fontWeight : "700"
+      fontWeight : "700",
+      cursor : "pointer"
     }}>
       {props.children}
     </div>
