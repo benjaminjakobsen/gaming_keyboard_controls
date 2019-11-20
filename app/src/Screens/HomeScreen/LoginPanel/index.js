@@ -40,8 +40,11 @@ function CreateAccount(props){
         },
       }).then((res) => {
         if(res.ok){
-          //history.push("/dashboard");
+          return res.json();
         }
+      }).then((res) => {
+        setSessionCookie(res.sessionCookie);
+        history.push("/dashboard");
       }).catch((err) => {
         console.error(err)
       })
@@ -93,9 +96,11 @@ function Login(props){
         },
       }).then((res) => {
         if(res.ok){
-          console.log(res)
-          //history.push("/dashboard");
+          return res.json()
         }
+      }).then((res) => {
+        setSessionCookie(res.sessionCookie);
+        history.push("/dashboard");
       }).catch((err) => {
         console.error(err)
       })
@@ -106,6 +111,12 @@ function Login(props){
       <div style={{margin : "auto", width : "fit-content"}}><button className={"LoginPanel-button"} type={"submit"}>Login</button></div>
     </form>
   );
+}
+
+const setSessionCookie = (cookie) => {
+  const date =new Date();
+  date.setSeconds(date.getSeconds() + 60);
+  document.cookie = `session=${cookie}; expires=${date}`;
 }
 
 export default LoginPanel;
