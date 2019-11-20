@@ -13,7 +13,6 @@ function LoginPanel(props){
 function CreateAccount(props){
   return (
     <form style={{
-      background : "blue",
       height : "88vh",
       flex : 1
     }}>
@@ -26,7 +25,6 @@ function CreateAccount(props){
 function Login(props){
   return (
     <form style={{
-      background : "green",
       height : "88vh",
       flex : 1,
     }} onSubmit={(e) => {

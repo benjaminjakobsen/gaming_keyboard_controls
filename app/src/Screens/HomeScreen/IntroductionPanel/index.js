@@ -8,13 +8,14 @@ function __Component__(props){
       padding: "20vh 0"
     }}>
       <div style={{
-        backgroundColor: "grey",
+       // backgroundColor: "grey",
         height: "50vh",
         width: "50%",
         borderRadius: "20px",
         margin: "auto",
-        background: "rgb(0,85,3)",
-        background: "radial-gradient(circle, rgba(0,85,3,1) 0%, rgba(0,40,2,1) 0%, rgba(0,0,0,0.7987788865546218) 80%)"
+        //background: "rgb(0,85,3)",
+       // background: "radial-gradient(circle, rgba(0,85,3,1) 0%, rgba(0,40,2,1) 0%, rgba(0,0,0,0.7987788865546218) 80%)",
+        overflow : "hidden"
       }}>
       <div style={{
         fontWeight: "bold",
