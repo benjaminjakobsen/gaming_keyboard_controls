@@ -7,6 +7,8 @@ import LoginPanel from './LoginPanel'
 
 function HomeScreen(props){
   const menuRef = useRef(null);
+  const loginRef = useRef(null);
+
   return (
     <div className={"HomeScreen-main-container"}>
       <div style={{
@@ -63,8 +65,15 @@ function HomeScreen(props){
         background: "rgb(0,0,0)",
         background: "linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0.2%, rgba(30,100,0,1) 100%)"
       }}>
-        <IntroductionPanel/>
-        <LoginPanel/>
+        <IntroductionPanel buttonClickHandler={() => {
+          loginRef.current.scrollIntoView({ 
+            behavior: "smooth"
+         });
+        }}/>
+        <div ref={loginRef}>
+          <LoginPanel />
+        </div>
+        
       </div>  
     </div>
 

@@ -8,13 +8,10 @@ function __Component__(props){
       padding: "20vh 0"
     }}>
       <div style={{
-       // backgroundColor: "grey",
         height: "50vh",
         width: "50%",
         borderRadius: "20px",
         margin: "auto",
-        //background: "rgb(0,85,3)",
-       // background: "radial-gradient(circle, rgba(0,85,3,1) 0%, rgba(0,40,2,1) 0%, rgba(0,0,0,0.7987788865546218) 80%)",
         overflow : "hidden"
       }}>
       <div style={{
@@ -25,6 +22,21 @@ function __Component__(props){
         <h2>Introduction</h2>
         On this page you will put through a number of tests to improve your abilities to use a keyboard. Enjoy!
       </div>
+
+      <div style={{
+          color : "white",
+          fontSize : "1.5rem",
+          width: "fit-content",
+          margin: "6vh auto",
+          fontWeight: "bold",
+          backgroundColor : "rgb(0, 80, 0)",
+          padding : "1%",
+          borderRadius : "10px",
+          
+          cursor : "pointer"
+        }} onClick={() => props.buttonClickHandler()}>
+          Go to login
+        </div>
 
       </div>
 
