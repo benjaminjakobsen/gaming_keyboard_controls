@@ -14,6 +14,9 @@ function App() {
         <Route exact path="/">
           <HomeScreen/>
         </Route>
+        <Route exact path="/dashboard">
+          <h1>Welcome</h1>
+        </Route>
         <Route path="/*">
           <h1>The URL does not exist</h1>
         </Route>

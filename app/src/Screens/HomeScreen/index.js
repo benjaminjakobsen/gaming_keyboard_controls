@@ -5,6 +5,7 @@ import Menu from 'Components/Menu/index.js'
 import IntroductionPanel from './IntroductionPanel'
 import LoginPanel from './LoginPanel'
 
+
 function HomeScreen(props){
   const homeRef = useRef(null);
   const introRef = useRef(null);
@@ -89,11 +90,9 @@ function HomeScreen(props){
             behavior: "smooth"
         });
         }}/>
-        
         <div ref={loginRef}>
           <LoginPanel />
         </div>
-        
       </div>  
     </div>
 
