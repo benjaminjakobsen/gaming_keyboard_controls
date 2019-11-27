@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 
-function __Component__(props){
+function IntroductionPanel(props){
   return (
     <div style={{
       width: "100%",
@@ -46,4 +46,4 @@ function __Component__(props){
   );
 }
 
-export default __Component__;
+export default IntroductionPanel;

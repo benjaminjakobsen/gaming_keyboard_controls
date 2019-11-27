@@ -78,7 +78,16 @@ function HomeScreen(props){
               behavior: "smooth"
             })
           }
-        }}/>
+        }} items={[{
+          key : "Home",
+          content : "Home"
+        }, {
+          key : "Introduction",
+          content : "Introduction"
+        }, {
+          key : "Login",
+          content : "Login"
+        }]} className={"HomeScreenStyle"}/>
       </div>
       <div style={{
         width : "100%",

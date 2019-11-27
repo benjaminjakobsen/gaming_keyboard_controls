@@ -9,33 +9,21 @@ function Menu(props){
       display : "flex",
       justifyContent: "space-around"
     }}>
-      <div onClick={() => props.buttonClickHandler("Home")}>
-        <MenuItem>Home</MenuItem>
-      </div>
-      <div onClick={() => props.buttonClickHandler("Introduction")}>
-        <MenuItem>Introduction</MenuItem>
-      </div>
-      <div onClick={() => props.buttonClickHandler("Login")}>
-        <MenuItem>Login</MenuItem>
-      </div>
+      {
+        props.items.map((item, idx) => {
+          return <div key={item.key} onClick={() => props.buttonClickHandler(item.key)}>
+            <MenuItem className={props.className}>{item.content}</MenuItem>
+          </div>
+        })
+      }
     </div>
   );
 }
 
 function MenuItem(props){
   return (
-  <div style={{
-    position : "relative",
-    width : "100%",
-    height : "100%"
-  }}>
-    <div style={{
-      position : "absolute",
-      top : "50%", left : "50%",
-      transform: "translate(-50%, -50%)",
-      fontWeight : "700",
-      cursor : "pointer"
-    }}>
+  <div className={props.className}>
+    <div>
       {props.children}
     </div>
   </div>
