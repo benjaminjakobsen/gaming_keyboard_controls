@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './index.css';
 import Menu from 'Components/Menu'
+import Dropdown from './Dropdown'
+
 
 // like enumerate types
 const pages = {
@@ -9,6 +11,7 @@ const pages = {
   LEADERBOARD : "leaderboard",
   EDITPROFILE : "editprofile",
 }
+
 
 function DashBoardScreen(props){
   const [currentPage, setCurrentPage] = useState(pages.CHALLENGES);
@@ -32,8 +35,13 @@ function DashBoardScreen(props){
         }, {
           key : pages.LEADERBOARD,
           content : "Leaderboard"
-        }]} buttonClickHandler={(page) => {
-          console.log(page);
+        }, {
+          key : "dropdownProfile",
+          content : <Dropdown></Dropdown>
+          
+        }]} buttonClickHandler={(key) => {
+          console.log(key);
+          
         }} className={"DashBoardStyle"}/>
       </div>
     </>
