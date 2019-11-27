@@ -11,9 +11,7 @@ function Menu(props){
     }}>
       {
         props.items.map((item, idx) => {
-          return <div key={item.key} onClick={() => props.buttonClickHandler(item.key)}>
-            <MenuItem className={props.className}>{item.content}</MenuItem>
-          </div>
+          return <MenuItem key={item.key} onClick={() => props.buttonClickHandler(item.key)} className={props.className}>{item.content}</MenuItem>
         })
       }
     </div>
@@ -22,7 +20,7 @@ function Menu(props){
 
 function MenuItem(props){
   return (
-  <div className={props.className}>
+  <div onClick={() => props.onClick()} className={props.className}>
     <div>
       {props.children}
     </div>

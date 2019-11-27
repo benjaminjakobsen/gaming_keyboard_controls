@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './index.css';
 import Menu from 'Components/Menu'
 import SidePanel from './SidePanel';
+import Dropdown from './Dropdown'
 
 // like enumerate types
 const pages = {
@@ -11,8 +12,10 @@ const pages = {
   EDITPROFILE : "editprofile",
 }
 
+
 function DashBoardScreen(props){
   const [currentPage, setCurrentPage] = useState(pages.CHALLENGES);
+  const [showDropDownProfile, setShowDropDownProfile] = useState(false);
   return (
     <>
       <div style={{
@@ -43,8 +46,29 @@ function DashBoardScreen(props){
         }, {
           key : pages.LEADERBOARD,
           content : "Leaderboard"
-        }]} buttonClickHandler={(page) => {
-          console.log(page);
+        }, {
+          key : "dropdownProfile",
+          content : <Dropdown outSideClick={() => {
+            setShowDropDownProfile(false);
+          }} show={showDropDownProfile} items={[
+            {
+              content : "Edit profile",
+              handler : () => {
+                setCurrentPage(pages.EDITPROFILE)
+              }
+            },
+            {
+              content : "Logout",
+              handler : () => {
+                // do something
+              }
+            }
+          ]}></Dropdown>
+          
+        }]} buttonClickHandler={(key) => {
+          if(key == "dropdownProfile"){
+            setShowDropDownProfile(!showDropDownProfile);
+          }
         }} className={"DashBoardStyle"}/>
       </div>
     </>
