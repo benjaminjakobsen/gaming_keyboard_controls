@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './index.css';
 import Menu from 'Components/Menu'
+import SidePanel from './SidePanel';
 
 // like enumerate types
 const pages = {
@@ -14,6 +15,16 @@ function DashBoardScreen(props){
   const [currentPage, setCurrentPage] = useState(pages.CHALLENGES);
   return (
     <>
+      <div style={{
+        backgroundColor : "blue",
+        color : "white",
+        height : "88vh",
+        width : "20vw",
+        position: "fixed",
+        top : "12vh"
+      }}>
+        <SidePanel/>
+      </div>
       <div style={{
         backgroundColor : "black",
         color : "white",

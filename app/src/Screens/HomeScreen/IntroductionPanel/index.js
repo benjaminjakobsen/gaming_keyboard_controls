@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import Button from 'Components/CustomButton'
 
 function IntroductionPanel(props){
   return (
@@ -14,35 +15,24 @@ function IntroductionPanel(props){
         margin: "auto",
         overflow : "hidden"
       }}>
-      <div style={{
-        fontWeight: "bold",
-        fontSize: "1.5rem",
-        color: "white"
-      }}>
-        <h2>Introduction</h2>
-        On this page you will put through a number of tests to improve your abilities to use a keyboard. Enjoy!
-      </div>
-
-      <div style={{
-          color : "white",
-          fontSize : "1.5rem",
-          width: "fit-content",
-          margin: "6vh auto",
+        <div style={{
           fontWeight: "bold",
-          backgroundColor : "rgb(0, 80, 0)",
-          padding : "1%",
-          borderRadius : "10px",
-          
-          cursor : "pointer"
-        }} onClick={() => props.buttonClickHandler()}>
-          Go to login
+          fontSize: "1.5rem",
+          color: "white"
+        }}>
+          <h2>Introduction</h2>
+          On this page you will put through a number of tests to improve your abilities to use a keyboard. Enjoy!
         </div>
 
+        <div style={{
+            width: "fit-content",
+            height : "fit-content",
+            margin: "6vh auto",
+          }}>
+            <Button onClick={() => props.buttonClickHandler()}>Go to login</Button>
+        </div>
       </div>
-
-      
     </div>
-    
   );
 }
 

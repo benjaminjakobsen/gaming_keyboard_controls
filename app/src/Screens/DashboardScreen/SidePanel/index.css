@@ -1,1 +1,20 @@
+.SidePanel-container{
+    display : flex;
+    flex-direction : column;
+    width : 100%;
+    height : 100%;
+    box-shadow: 10px 0px 20px 1px grey;
+}
 
+.SidePanel-container > div{
+    flex : 1;
+    position: relative;
+}
+
+.SidePanel-centered-item{
+    margin : auto;
+    top : 0; right : 0; bottom : 0; left : 0;
+    width : fit-content;
+    height : fit-content;
+    position: absolute;
+}
