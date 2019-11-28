@@ -34,7 +34,7 @@ function DropDown(props){
       }}>
         {
           props.items.map((item, idx) => {
-            return <div className={"DropDown-item"} style={{
+            return <div key={idx} onClick={() => item.handler()} className={"DropDown-item"} style={{
               padding : idx != props.items.length - 1 ? "1vmax 1vmax 0.5vmax 1vmax" : "0.5vmax 1vmax 1vmax 1vmax"
             }}>
               {item.content} 

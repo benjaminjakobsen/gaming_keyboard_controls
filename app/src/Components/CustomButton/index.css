@@ -1,3 +1,6 @@
-.CustomButton-container:hover{
+.CustomButton-container{
+}
+
+.CustomButton-hover-effect:hover{
     box-shadow: 0px 0px 2px 1px white;
 }

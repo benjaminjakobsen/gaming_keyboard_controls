@@ -28,21 +28,27 @@ function SidePanel(props){
         <Button style={{
           width : "16vw",
           fontSize : "1.2rem",
-          textOverflow: "ellipsis"
+          textOverflow: "ellipsis",
+          backgroundColor : "#6ee06e",
+          color : "black"
         }}> challenge 2</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
         <Button style={{
           width : "16vw",
           fontSize : "1.2rem",
-          textOverflow: "ellipsis"
+          textOverflow: "ellipsis",
+          backgroundColor : "#ebed58",
+          color : "black"
         }}> challenge 3</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
-        <Button style={{
+        <Button disabled={true} style={{
           width : "16vw",
           fontSize : "1.2rem",
-          textOverflow: "ellipsis"
+          textOverflow: "ellipsis",
+          backgroundColor : "lightgrey",
+          color : "grey"
         }}> challenge 4</Button>
       </div></div>
     </div>

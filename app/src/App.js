@@ -6,6 +6,10 @@ import DashBoardScreen from './Screens/DashboardScreen';
 
 function App() {
   document.getElementsByTagName("html")[0].style.fontSize = window.screen.availWidth * 0.01 + "px";
+  // regular expression found at: https://stackoverflow.com/questions/5968196/check-cookie-if-cookie-exists
+  if(!document.cookie.match(/^(.*;)?\s*session\s*=\s*[^;]+(.*)?$/) && !(document.location.pathname == "" || document.location.pathname == "/")){
+    document.location.pathname = "";
+  }
   return (
     <BrowserRouter>
       <Switch>
@@ -15,7 +19,7 @@ function App() {
         <Route exact path="/">
           <HomeScreen/>
         </Route>
-        <Route exact path="/dashboard">
+        <Route exact path="/dashboard*">
           <DashBoardScreen/>
         </Route>
         <Route path="/*">

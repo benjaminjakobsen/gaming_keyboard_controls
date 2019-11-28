@@ -3,8 +3,8 @@ import './index.css';
 
 function CustomButton(props){
   return (
-    <div className={"CustomButton-container"} style={{
-      color : "white",
+    <div className={"CustomButton-container " + (props.disabled ? "" : "CustomButton-hover-effect")} style={{
+      color : props.disabled ? "black" : "white",
       fontSize : "1.5rem",
       width: "fit-content",
       height : "fit-content",
@@ -12,11 +12,11 @@ function CustomButton(props){
       backgroundColor : "rgb(0, 80, 0)",
       padding : "10px",
       borderRadius : "10px",
-      cursor : "pointer",
+      cursor : props.disabled ? "unset" : "pointer",
       textAlign : "center",
       ...props.style
     }} onClick={() => {
-      if(props.onClick) props.onClick()
+      if(props.onClick && !props.disabled) props.onClick()
     }}>
       {props.children}
     </div>

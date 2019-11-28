@@ -43,7 +43,7 @@ function CreateAccount(props){
           return res.json();
         }
       }).then((res) => {
-        setSessionCookie(res.sessionCookie);
+        setSessionCookieAndUserID(res.sessionCookie, res.userID);
         history.push("/dashboard");
       }).catch((err) => {
         console.error(err)
@@ -99,7 +99,7 @@ function Login(props){
           return res.json()
         }
       }).then((res) => {
-        setSessionCookie(res.sessionCookie);
+        setSessionCookieAndUserID(res.sessionCookie, res.userID);
         history.push("/dashboard");
       }).catch((err) => {
         console.error(err)
@@ -113,10 +113,11 @@ function Login(props){
   );
 }
 
-const setSessionCookie = (cookie) => {
+const setSessionCookieAndUserID = (cookie, userID) => {
   const date =new Date();
-  date.setSeconds(date.getSeconds() + 60);
+  date.setSeconds(date.getSeconds() + 600);
   document.cookie = `session=${cookie}; expires=${date}`;
+  document.cookie = `userID=${userID}; expires=${date}`;
 }
 
 export default LoginPanel;
