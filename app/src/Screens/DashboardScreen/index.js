@@ -10,7 +10,9 @@ import {
   Route
 } from 'react-router-dom'
 import EditProfile from './EditProfile';
-
+import StatsPage from './StatsPage'
+import LeaderBoardPage from './LeaderBoardPage'
+import ChallengesPage from './ChallengesPage'
 
 // like enumerate types
 const pages = {
@@ -33,7 +35,10 @@ function DashBoardScreen(props){
         height : "88vh",
         backgroundColor : "lightgrey"
       }}>
-        <Route path={"/dashboard/edit-profile"} component={EditProfile}/>
+        <Route path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
+        <Route path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
+        <Route path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
+        <Route path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",
@@ -105,7 +110,7 @@ function DashBoardScreen(props){
           if(key == "dropdownProfile"){
             setShowDropDownProfile(!showDropDownProfile);
           }else{
-            history.push(key);
+            history.push("/dashboard/" + key);
           }
         }} className={"DashBoardStyle"}/>
       </div>
