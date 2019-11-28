@@ -35,10 +35,10 @@ function DashBoardScreen(props){
         height : "88vh",
         backgroundColor : "lightgrey"
       }}>
-        <Route path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
-        <Route path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
-        <Route path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
-        <Route path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
+        <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
+        <Route exact path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
+        <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
+        <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",
