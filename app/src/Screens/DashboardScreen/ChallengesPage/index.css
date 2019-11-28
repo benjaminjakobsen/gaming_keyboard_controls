@@ -1,1 +1,8 @@
+.ChallengePage-challenge:hover{
+    filter : brightness(0.7);
+}
 
+.ChallengesPage-main-container{
+    height : 100%;
+    width : 100%;
+}

@@ -35,10 +35,10 @@ function DashBoardScreen(props){
         height : "88vh",
         backgroundColor : "lightgrey"
       }}>
-        <Route path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
-        <Route path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
-        <Route path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
-        <Route path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
+        <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
+        <Route exact path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
+        <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
+        <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",
@@ -46,27 +46,10 @@ function DashBoardScreen(props){
         height : "88vh",
         width : "20vw",
         position: "fixed",
-        top : "12vh"
+        top : "12vh",
+        boxShadow: "10px 0px 20px 1px grey"
       }}>
         <SidePanel/>
-      </div>
-      <div style={{
-        backgroundColor : "rgb(47, 47, 47)",
-        color : "white",
-        height : "12vh",
-        width : "20vw",
-        position: "fixed",
-        top : "0vh"
-      }}>
-        <img src={Logo} style={{
-          width : "8vmin",
-          position : "absolute",
-          top : 0, bottom : 0, right : 0, left : 0,
-          margin : "auto",
-          cursor : "pointer"
-        }} onClick={() => {
-          history.push("/")
-        }}/>
       </div>
       <div style={{
         backgroundColor : "black",
@@ -75,7 +58,8 @@ function DashBoardScreen(props){
         width : "80vw",
         left : "20vw",
         position: "fixed",
-        top : "0"
+        top : "0",
+        boxShadow: "0px 10px 20px 1px grey"
       }}>
         <Menu items={[{
           key : pages.CHALLENGES,
@@ -113,6 +97,24 @@ function DashBoardScreen(props){
             history.push("/dashboard/" + key);
           }
         }} className={"DashBoardStyle"}/>
+      </div>
+      <div style={{
+        backgroundColor : "rgb(47, 47, 47)",
+        color : "white",
+        height : "12vh",
+        width : "20vw",
+        position: "fixed",
+        top : "0vh"
+      }}>
+        <img src={Logo} style={{
+          width : "8vmin",
+          position : "absolute",
+          top : 0, bottom : 0, right : 0, left : 0,
+          margin : "auto",
+          cursor : "pointer"
+        }} onClick={() => {
+          history.push("/")
+        }}/>
       </div>
     </>
   );
