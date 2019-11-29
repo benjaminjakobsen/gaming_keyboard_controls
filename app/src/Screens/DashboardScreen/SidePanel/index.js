@@ -1,8 +1,20 @@
 import React from 'react';
 import './index.css';
 import Button from 'Components/CustomButton'
+import {
+  useHistory
+} from 'react-router-dom';
+
+const pages = {
+  CHALLENGES : "challenges",
+  STATS : "stats",
+  LEADERBOARD : "leaderboard",
+  EDITPROFILE : "edit-profile",
+}
+
 
 function SidePanel(props){
+  const history = useHistory();
   const user = { // should be recieved from props
     name : "William",
     points : "100",
@@ -16,9 +28,15 @@ function SidePanel(props){
   }
   return (
     <div className={"SidePanel-container"}>
-      <div><div className={"SidePanel-centered-item"}>Username: {user.name}</div></div>
-      <div><div className={"SidePanel-centered-item"}>Points: {user.points} </div></div>
-      <div><div className={"SidePanel-centered-item"}>Global rank: {user.rank}</div></div>
+      <div><div onClick={() =>{
+        history.push(`/dashboard/${pages.EDITPROFILE}`)
+      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Username: {user.name}</div></div>
+      <div><div onClick={() =>{
+        history.push(`/dashboard/${pages.STATS}`)
+      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Points: {user.points} </div></div>
+      <div><div onClick={() =>{
+        history.push(`/dashboard/${pages.LEADERBOARD}`)
+      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Global rank: {user.rank}</div></div>
       <div style={{
         borderBottom : "2px solid black",
         width : "100%",
@@ -31,7 +49,7 @@ function SidePanel(props){
           textOverflow: "ellipsis",
           backgroundColor : "#6ee06e",
           color : "black"
-        }}> challenge 2</Button>
+        }}> Previous challenge</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
         <Button style={{
@@ -40,7 +58,7 @@ function SidePanel(props){
           textOverflow: "ellipsis",
           backgroundColor : "#ebed58",
           color : "black"
-        }}> challenge 3</Button>
+        }}> Current challenge</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
         <Button disabled={true} style={{
@@ -49,7 +67,7 @@ function SidePanel(props){
           textOverflow: "ellipsis",
           backgroundColor : "lightgrey",
           color : "grey"
-        }}> challenge 4</Button>
+        }}> Next challenge</Button>
       </div></div>
     </div>
   );
