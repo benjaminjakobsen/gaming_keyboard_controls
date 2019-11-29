@@ -4,7 +4,11 @@ import './index.css';
 const players = ["Bob", "Eric", "David", "William", "Benjamin", "Jesus", "Stone", "Poul", "Victor", "Daniel"]
 function LeaderBoardPage(props){
   return (
-    <>
+    <div style={{
+      height : "100%",
+      width : "100%",
+      overflowY : "scroll"
+    }}>
     <table className = {"LeaderBoardPage-table"} style={{
       width : "40%",
       border : "1px solid black",
@@ -12,7 +16,8 @@ function LeaderBoardPage(props){
       textAlign : "left",
       borderSpacing : "2vmax",
       fontWeight : "700",
-      fontSize : "1.2rem"
+      fontSize : "1.2rem",
+      height : "100%",
     }}>
       <caption style={{
         fontWeight : "700",
@@ -35,7 +40,7 @@ function LeaderBoardPage(props){
       }
     </table>
 
-    </>
+    </div>
   );
 }
 
