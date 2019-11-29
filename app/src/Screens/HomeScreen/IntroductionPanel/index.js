@@ -29,7 +29,10 @@ function IntroductionPanel(props){
             height : "fit-content",
             margin: "6vh auto",
           }}>
-            <Button onClick={() => props.buttonClickHandler()}>Go to login</Button>
+            <Button style={{
+              width : "15vmax",
+              height : "5vmax"
+            }} onClick={() => props.buttonClickHandler()}>Go to login</Button>
         </div>
       </div>
     </div>

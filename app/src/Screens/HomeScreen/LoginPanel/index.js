@@ -1,8 +1,7 @@
 import React, {useRef} from 'react';
 import './index.css';
 import { useHistory } from "react-router-dom";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+import customFetch from 'services/requests.js'
 
 function LoginPanel(props){
   return (
@@ -32,22 +31,11 @@ function CreateAccount(props){
         username : usernameRef.current.value,
         password : passwordRef.current.value
       };
-      fetch(BACKEND_URL + '/users', {
-        method : "POST",
-        body : JSON.stringify(body),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }).then((res) => {
-        if(res.ok){
-          return res.json();
-        }
-      }).then((res) => {
-        setSessionCookieAndUserID(res.sessionCookie, res.userID);
+      customFetch("/users", body, () => {
         history.push("/dashboard");
-      }).catch((err) => {
-        console.error(err)
-      })
+      }, {
+        method : "POST"
+      });
     }}>
       <h2 style={{textAlign : "center", color : "white"}}>Not registered - create an account</h2>
       <div className={"LoginPanel-input-container"}>Email*<input ref={emailRef} type={"email"} required/></div>
@@ -88,22 +76,11 @@ function Login(props){
         email : emailRef.current.value,
         password : passwordRef.current.value
       };
-      fetch(BACKEND_URL + '/login', {
-        method : "POST",
-        body : JSON.stringify(body),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }).then((res) => {
-        if(res.ok){
-          return res.json()
-        }
-      }).then((res) => {
-        setSessionCookieAndUserID(res.sessionCookie, res.userID);
+      customFetch("/login", body, () => {
         history.push("/dashboard");
-      }).catch((err) => {
-        console.error(err)
-      })
+      }, {
+        method : "POST"
+      });
     }}>
       <h2 style={{textAlign : "center", color : "white"}}>Already registered - login below</h2>
       <div className={"LoginPanel-input-container"}>Email<input type={"email"} ref={emailRef} required/></div>
@@ -111,13 +88,6 @@ function Login(props){
       <div style={{margin : "auto", width : "fit-content"}}><button className={"LoginPanel-button"} type={"submit"}>Login</button></div>
     </form>
   );
-}
-
-const setSessionCookieAndUserID = (cookie, userID) => {
-  const date =new Date();
-  date.setSeconds(date.getSeconds() + 600);
-  document.cookie = `session=${cookie}; expires=${date}`;
-  document.cookie = `userID=${userID}; expires=${date}`;
 }
 
 export default LoginPanel;
