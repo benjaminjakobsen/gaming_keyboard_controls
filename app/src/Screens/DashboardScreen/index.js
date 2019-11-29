@@ -33,7 +33,8 @@ function DashBoardScreen(props){
         left : "20vw",
         width : "80vw",
         height : "88vh",
-        backgroundColor : "lightgrey"
+        backgroundColor : "lightgrey",
+        overflowY : "scroll"
       }}>
         <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
         <Route exact path={`/dashboard/${pages.STATS}`} component={StatsPage}/>

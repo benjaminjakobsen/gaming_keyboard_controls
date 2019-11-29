@@ -8,18 +8,17 @@ function LeaderBoardPage(props){
     <table className = {"LeaderBoardPage-table"}style={{
       width : "40%",
       border : "1px solid black",
-      margin : "auto",
+      margin : "5vh auto",
       textAlign : "left",
       borderSpacing : "2vmax",
-      marginTop : "5vh",
       fontWeight : "700",
       fontSize : "1.2rem"
-
     }}>
       <caption style={{
         fontWeight : "700",
         fontSize : "2rem",
-        marginBottom : "2vh"
+        marginBottom : "2vh",
+        position : "sticky"
       }}>Global leaderboard</caption>
       <tr>
         <th><p style={{fontSize : "1.5rem", marginBottom : "0vh", marginTop : "-1vh"}}>Rank</p></th>
