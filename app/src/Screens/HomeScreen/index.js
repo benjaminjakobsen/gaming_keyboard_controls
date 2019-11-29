@@ -33,7 +33,7 @@ function HomeScreen(props){
         }}>
           Welcome
         </div>
-        <div style={{
+        <div className = {"HomeScreen-button"}style={{
           color : "white",
           position : "absolute",
           left: "75%", top : "50%",

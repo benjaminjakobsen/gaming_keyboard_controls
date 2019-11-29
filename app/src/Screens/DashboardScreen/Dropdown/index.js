@@ -24,7 +24,7 @@ function DropDown(props){
         height : "50px",
         width : "fit-content",
         position : "absolute",
-        right : "0",
+        right : "-3.5vw",
         height : "fit-content",
         width : "10vmax",
         color : "black",

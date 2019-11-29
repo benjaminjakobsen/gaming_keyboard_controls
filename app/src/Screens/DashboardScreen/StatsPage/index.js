@@ -15,14 +15,14 @@ function StatsPage(props){
   const history = useHistory();
   return (
     <div className = {"StatsPage-divBox"} style={{
-      height : "75vh",
-      width : "50%",
-      marginLeft : "7vw",
-      marginTop : "6vh",
-      borderRadius : "15px"
+      height : "65vh",
+      width : "40%",
+      marginLeft : "23vw",
+      marginTop : "13vh",
+      outline : "1px solid black"
     }}>
       <div style={{
-        height : "10vh",
+        height : "5vh",
         margin : "auto"}}>
       </div>
       <div onClick={() =>{
