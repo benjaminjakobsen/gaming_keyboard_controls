@@ -119,7 +119,8 @@ function ChallengesPage(props){
         boxShadow: "-10px 0px 20px 1px grey",
         height : "100%",
         transition : "width 500ms",
-        position : "relative"
+        position : "relative",
+        backgroundColor : "#6688c4"
       }}>
         {showSidePanel && <ChallengeInfo closeHandler={() => {
           setShowSidePanel(false)
@@ -164,36 +165,28 @@ function ChallengeInfo(props){
       height : "100%",
       fontWeight : "600"
     }}>
-      <div style={{flexGrow : 1, position : "relative"}}>
-        <div style={{
-          width : "fit-content", height : "fit-content",
-          top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
-        }}>Challenge: {challenge.title}</div>
-      </div>
-      <div style={{flexGrow : 1, position : "relative"}}>
-        <div style={{
-          width : "fit-content", height : "fit-content",
-          top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
-        }}>Points: {challenge.points}</div>
-      </div>
-      <div style={{flexGrow : 1, position : "relative"}}>
-        <div style={{
-          width : "fit-content", height : "fit-content",
-          top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
-        }}>Difficulty: {Math.round(challenge.points / 100)}</div>
-      </div>
-      <div style={{flexGrow : 1, position : "relative"}}>
-        <div style={{
-          width : "fit-content", height : "fit-content",
-          top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
-        }}>Status: {userChallenge.done ? "completed" : "uncompleted"}</div>
-      </div>
-      <div style={{flexGrow : 1, position : "relative"}}>
-        <div style={{
-          width : "fit-content", height : "fit-content",
-          top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
-        }}>{userChallenge.done ? "Best time: " + userChallenge.bestTime + " seconds": ""}</div>
-      </div>
+      <table className={"ChallengeInfo-data"}>
+        <tr>
+          <td>Challenge</td>
+          <td>{challenge.title}</td>
+        </tr>
+        <tr>
+          <td>Points</td>
+          <td>{challenge.points}</td>
+        </tr>
+        <tr>
+          <td>Difficulty</td>
+          <td>{Math.round(challenge.points / 100)}</td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td>{userChallenge.done ? "completed" : "uncompleted"}</td>
+        </tr>
+        <tr>
+          <td>{"Best time"}</td>
+          <td>{userChallenge.done ? userChallenge.bestTime + " seconds" : "Infinitely many seconds"}</td>
+        </tr>
+      </table>
       <div style={{flexGrow : 1, position : "relative"}}>
         <div style={{
           width : "fit-content", height : "fit-content",

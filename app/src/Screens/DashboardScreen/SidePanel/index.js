@@ -48,7 +48,8 @@ function SidePanel(props){
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
           backgroundColor : "#6ee06e",
-          color : "black"
+          color : "black",
+          height : "5vh"
         }}> Previous challenge</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
@@ -57,7 +58,8 @@ function SidePanel(props){
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
           backgroundColor : "#ebed58",
-          color : "black"
+          color : "black",
+          height : "5vh"
         }}> Current challenge</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
@@ -66,7 +68,8 @@ function SidePanel(props){
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
           backgroundColor : "lightgrey",
-          color : "grey"
+          color : "grey",
+          height : "5vh"
         }}> Next challenge</Button>
       </div></div>
     </div>
