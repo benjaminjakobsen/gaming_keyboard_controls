@@ -7,7 +7,7 @@ function Menu(props){
       width : "100%",
       height : "100%",
       display : "flex",
-      justifyContent: "space-around"
+      justifyContent: "space-around",
     }}>
       {
         props.items.map((item, idx) => {

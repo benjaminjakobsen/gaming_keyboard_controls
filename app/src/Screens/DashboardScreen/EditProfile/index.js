@@ -3,8 +3,7 @@ import './index.css';
 import {
   useHistory
 } from 'react-router-dom'
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+import customFetch from 'services/requests'
 
 function EditProfile(props){
   const passwordRef = useRef(null);
@@ -20,37 +19,22 @@ function EditProfile(props){
         paddingTop : "5vh"
       }} onSubmit={(e) => {
         e.preventDefault();
-        const body = {
-          data : {},
-          auth : {
-            userId : window.readCookie("userID"),
-            sessionCookie : window.readCookie("session")
-          }
-        };
-        if(emailRef.current.value != "") body.data.email = emailRef.current.value;
-        if(usernameRef.current.value != "") body.data.username = usernameRef.current.value;
-        if(passwordRef.current.value != "") body.data.password = passwordRef.current.value;
-        alert("Updated: " + (() => {
-          let res = [];
-          for(const key in body.data){
-            res.push(key);
-          }
-          return res.join(", ");
-        })());
-        fetch(BACKEND_URL + `/users`, {
-          method : "PATCH",
-          body : JSON.stringify(body),
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        }).then((res) => {
-          if(res.ok){
-            return res.json();
-          }
-        }).then((res) => {
+        const body = {};
+        if(emailRef.current.value != "") body.email = emailRef.current.value;
+        if(usernameRef.current.value != "") body.username = usernameRef.current.value;
+        if(passwordRef.current.value != "") body.password = passwordRef.current.value;
+        customFetch("/users", body, (res) => {
+          alert("Updated: " + (() => {
+            let res = [];
+            for(const key in body){
+              res.push(key);
+            }
+            return res.join(", ");
+          })());
+          sessionStorage.setItem("user", JSON.stringify(res.user));
           history.push("/dashboard");
-        }).catch((err) => {
-          console.error(err)
+        }, {
+          method : "PATCH"
         })
       }}>
         <h2 style={{textAlign : "center", color : "black"}}>Update account information</h2>

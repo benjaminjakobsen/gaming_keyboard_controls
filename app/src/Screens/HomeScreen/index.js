@@ -60,7 +60,8 @@ function HomeScreen(props){
         width : "100%",
         position: "-webkit-sticky",
         position: "sticky",
-        top : "0"
+        top : "0",
+        zIndex: "10"
       }}>
         <Menu buttonClickHandler={(page) => {
           if(page === "Home"){

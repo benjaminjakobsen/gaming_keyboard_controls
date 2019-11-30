@@ -31,7 +31,7 @@ function IntroductionPanel(props){
           }}>
             <Button style={{
               width : "15vmax",
-              height : "5vmax"
+              height : "5vmax",
             }} onClick={() => props.buttonClickHandler()}>Go to login</Button>
         </div>
       </div>
