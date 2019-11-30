@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import './index.css';
 import Menu from 'Components/Menu'
 import SidePanel from './SidePanel';
@@ -13,6 +13,7 @@ import EditProfile from './EditProfile';
 import StatsPage from './StatsPage'
 import LeaderBoardPage from './LeaderBoardPage'
 import ChallengesPage from './ChallengesPage'
+import customFetch from 'services/requests'
 
 // like enumerate types
 const pages = {
@@ -24,7 +25,15 @@ const pages = {
 
 function DashBoardScreen(props){
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
+  const [challenges, setChallenges] = useState([]);
+  useEffect(() => {
+    customFetch("/challenges", {}, (res) => {
+      setChallenges(res.challenges)
+    })
+  }, []);
+  console.log(challenges);
   const history = useHistory();
+  const user = JSON.parse(sessionStorage.getItem("user")); // could it not be ready yet at first render?
   return (
     <>
       <div style={{
@@ -49,7 +58,7 @@ function DashBoardScreen(props){
         top : "12vh",
         boxShadow: "10px 0px 20px 1px grey"
       }}>
-        <SidePanel/>
+        <SidePanel user={user}/>
       </div>
       <div style={{
         backgroundColor : "black",

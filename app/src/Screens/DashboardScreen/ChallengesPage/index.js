@@ -10,27 +10,27 @@ function ChallengesPage(props){
   const challenges = {1 : {
     title : "challenge 1",
     points : 100,
-    _id : 1,
+    orderingId : 1,
     predecessor : -1,
   }, 2 : {
     title : "challenge 2",
     points : 200,
-    _id : 2,
+    orderingId : 2,
     predecessor : 1
   },3 : {
     title : "challenge 3",
     points : 300,
-    _id : 3,
+    orderingId : 3,
     predecessor : 2
   },4 : {
     title : "challenge 4",
     points : 400,
-    _id : 4,
+    orderingId : 4,
     predecessor : 3
   },5 : {
     title : "challenge 5",
     points : 500,
-    _id : 5,
+    orderingId : 5,
     predecessor : 4
   }};
   const userChallenges = {
@@ -75,7 +75,7 @@ function ChallengesPage(props){
         }}>
           {
             Object.values(challenges).map((challenge, idx) => {
-              return <div className={"ChallengePage-challenge"} key={challenge._id + " " + idx} style={{
+              return <div className={"ChallengePage-challenge"} key={challenge.orderingId + " " + idx} style={{
                 backgroundColor : (challenge.points > 400 ? "#de5454" : (challenge.points >= 300 ? "#d5de54" : "#69de54")),
                 height : "6vh",
                 width : "100%",
@@ -84,10 +84,10 @@ function ChallengesPage(props){
                 position : "relative",
                 cursor : "pointer",
                 fontWeight : "600",
-                filter : showSidePanel && sidePanelChallengeID !== challenge._id ? "brightness(0.2)" : "unset"
+                filter : showSidePanel && sidePanelChallengeID !== challenge.orderingId ? "brightness(0.2)" : "unset"
               }} onClick={() => {
                 setShowSidePanel(true);
-                setSidePanelChallengeID(challenge._id);
+                setSidePanelChallengeID(challenge.orderingId);
               }}>
                 <div style={{
                   height : "fit-content",
@@ -97,7 +97,7 @@ function ChallengesPage(props){
                   right : "0", left : "0",
                   top : "0", bottom : "0"
                 }}>{challenge.title}</div>
-                {userChallenges[challenge._id].done && <div style={{
+                {userChallenges[challenge.orderingId].done && <div style={{
                   height : "fit-content",
                   width : "fit-content",
                   position : "absolute",
@@ -138,7 +138,6 @@ function ChallengeInfo(props){
   const userChallenge = props.userChallenge;
   const challenge = props.challenge;
   const canPlay = props.canPlay;
-  console.log(props.closeHandler)
   return (
     <>
     <div onClick={() => {
