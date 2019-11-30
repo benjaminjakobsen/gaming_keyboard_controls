@@ -4,19 +4,22 @@ export default function(url, body, handler, userOptions = {}){
     const options = {
         credentials: 'include',
         method : "GET",
-        body : JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json'
         },
         ...userOptions
     }
+    if(options.method != "GET") options.body = JSON.stringify(body);
     fetch(BACKEND_URL + url, options)
     .then((res) => {
-        if(res.ok) return res.json();
+        if(res.ok){
+            return res.json();
+        }else{
+            document.location.pathname = "/";
+        }
     }).then((res) => {
         handler(res);
     }).catch((err) => {
         console.error(err);
-        document.location.pathname = "/";
     });
 }

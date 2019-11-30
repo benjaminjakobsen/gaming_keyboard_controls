@@ -4,6 +4,11 @@ import { useHistory } from "react-router-dom";
 import customFetch from 'services/requests.js'
 
 function LoginPanel(props){
+  /*customFetch("/test", {}, () => {
+    console.log("wjdnwjdn")
+  }, {
+    method : "GET"
+  });*/
   return (
     <div className={"LoginPanel-main-container"}>
       <CreateAccount />
@@ -31,7 +36,8 @@ function CreateAccount(props){
         username : usernameRef.current.value,
         password : passwordRef.current.value
       };
-      customFetch("/users", body, () => {
+      customFetch("/users", body, (res) => {
+        sessionStorage.setItem("user", JSON.stringify(res.user));
         history.push("/dashboard");
       }, {
         method : "POST"
@@ -76,7 +82,8 @@ function Login(props){
         email : emailRef.current.value,
         password : passwordRef.current.value
       };
-      customFetch("/login", body, () => {
+      customFetch("/login", body, (res) => {
+        sessionStorage.setItem("user", JSON.stringify(res.user));
         history.push("/dashboard");
       }, {
         method : "POST"
