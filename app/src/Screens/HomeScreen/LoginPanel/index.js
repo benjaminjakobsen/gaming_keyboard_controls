@@ -37,7 +37,6 @@ function CreateAccount(props){
         password : passwordRef.current.value
       };
       customFetch("/users", body, (res) => {
-        sessionStorage.setItem("user", JSON.stringify(res.user));
         history.push("/dashboard");
       }, {
         method : "POST"
@@ -83,7 +82,6 @@ function Login(props){
         password : passwordRef.current.value
       };
       customFetch("/login", body, (res) => {
-        sessionStorage.setItem("user", JSON.stringify(res.user));
         history.push("/dashboard");
       }, {
         method : "POST"

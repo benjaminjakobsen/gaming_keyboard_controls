@@ -16,7 +16,6 @@ export default function(url, body, handler, userOptions = {}){
             return res.json();
         }else{
             document.location.pathname = "/";
-            sessionStorage.clear();
         }
     }).then((res) => {
         handler(res);

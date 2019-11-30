@@ -26,14 +26,17 @@ const pages = {
 function DashBoardScreen(props){
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
   const [challenges, setChallenges] = useState([]);
+  const [user, setUser] = useState(null);
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
       setChallenges(res.challenges)
     })
+    customFetch("/user", {}, (res) => {
+      setUser(res.user)
+    })
   }, []);
-  console.log(challenges);
+  console.log(challenges, user);
   const history = useHistory();
-  const user = JSON.parse(sessionStorage.getItem("user")); // could it not be ready yet at first render?
   return (
     <>
       <div style={{
