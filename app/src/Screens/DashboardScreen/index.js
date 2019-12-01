@@ -26,7 +26,7 @@ const pages = {
 function DashBoardScreen(props){
   const history = useHistory();
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
-  const [challenges, setChallenges] = useState([]);
+  const [challenges, setChallenges] = useState(null);
   const [user, setUser] = useState(null);
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
@@ -103,7 +103,6 @@ function DashBoardScreen(props){
             {
               content : "Logout",
               handler : () => {
-                document.cookie = "session=null;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
                 history.push("");
               }
             }

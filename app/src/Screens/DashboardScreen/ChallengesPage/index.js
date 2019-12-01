@@ -167,26 +167,28 @@ function ChallengeInfo(props){
       fontWeight : "600"
     }}>
       <table className={"ChallengeInfo-data"}>
-        <tr>
-          <td>Challenge</td>
-          <td>{challenge.title}</td>
-        </tr>
-        <tr>
-          <td>Points</td>
-          <td>{challenge.points}</td>
-        </tr>
-        <tr>
-          <td>Difficulty</td>
-          <td>{Math.round(challenge.points / 100)}</td>
-        </tr>
-        <tr>
-          <td>Status</td>
-          <td>{userChallenge.done ? "completed" : "uncompleted"}</td>
-        </tr>
-        <tr>
-          <td>{"Best time"}</td>
-          <td>{userChallenge.done ? userChallenge.bestTime + " seconds" : "Infinitely many seconds"}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Challenge</td>
+            <td>{challenge.title}</td>
+          </tr>
+          <tr>
+            <td>Points</td>
+            <td>{challenge.points}</td>
+          </tr>
+          <tr>
+            <td>Difficulty</td>
+            <td>{Math.round(challenge.points / 100)}</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>{userChallenge.done ? "completed" : "uncompleted"}</td>
+          </tr>
+          <tr>
+            <td>{"Best time"}</td>
+            <td>{userChallenge.done ? userChallenge.bestTime + " seconds" : "Infinitely many seconds"}</td>
+          </tr>
+        </tbody>
       </table>
       <div style={{flexGrow : 1, position : "relative"}}>
         <div style={{

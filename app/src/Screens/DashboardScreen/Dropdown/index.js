@@ -16,8 +16,8 @@ function DropDown(props){
           top : "0px"
       }} onClick={() => props.outSideClick()}/>}
       <img src={icon} style={{
-      height : "3vmax",
-      width : "3vmax"
+        height : "3vmax",
+        width : "3vmax"
       }}/>
       {props.show && <div style={{
         backgroundColor : "lightgrey",

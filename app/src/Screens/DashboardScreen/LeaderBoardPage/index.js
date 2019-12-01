@@ -24,20 +24,22 @@ function LeaderBoardPage(props){
         fontSize : "2rem",
         marginBottom : "2vh"
       }}>Global leaderboard</caption>
-      <tr>
-        <th><p style={{fontSize : "1.5rem", marginBottom : "0vh", marginTop : "-1vh"}}>Rank</p></th>
-        <th><p style={{fontSize : "1.5rem", marginBottom : "0vh", marginTop : "-1vh"}}>Username</p></th>
-      </tr>
-      {
-        players.map((player, idx) => {
-          return (
-            <tr>
-              <td>{idx+1}</td>
-              <td>{player}</td>
-            </tr>
-          );
-        })
-      }
+      <tbody>
+        <tr>
+          <th><p style={{fontSize : "1.5rem", marginBottom : "0vh", marginTop : "-1vh"}}>Rank</p></th>
+          <th><p style={{fontSize : "1.5rem", marginBottom : "0vh", marginTop : "-1vh"}}>Username</p></th>
+        </tr>
+        {
+          players.map((player, idx) => {
+            return (
+              <tr key={idx}>
+                <td>{idx+1}</td>
+                <td>{player}</td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
     </table>
 
     </div>

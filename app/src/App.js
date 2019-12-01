@@ -19,7 +19,10 @@ function App() {
         <Route exact path="/">
           <HomeScreen/>
         </Route>
-        <Route exact path="/dashboard*">
+        <Route exact path={"/dashboard"}>
+          <DashBoardScreen/>
+        </Route>
+        <Route exact path={"/dashboard/*"}>
           <DashBoardScreen/>
         </Route>
         <Route path="/*">

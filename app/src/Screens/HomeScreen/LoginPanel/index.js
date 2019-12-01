@@ -37,7 +37,7 @@ function CreateAccount(props){
         password : passwordRef.current.value
       };
       customFetch("/users", body, (res) => {
-        history.push("/dashboard");
+        history.push("/dashboard/challenges");
       }, {
         method : "POST"
       });
@@ -82,7 +82,7 @@ function Login(props){
         password : passwordRef.current.value
       };
       customFetch("/login", body, (res) => {
-        history.push("/dashboard");
+        history.push("/dashboard/challenges");
       }, {
         method : "POST"
       });
