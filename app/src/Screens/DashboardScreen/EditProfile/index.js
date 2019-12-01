@@ -31,7 +31,7 @@ function EditProfile(props){
             }
             return res.join(", ");
           })());
-          sessionStorage.setItem("user", JSON.stringify(res.user));
+          props.updateHandler(res.user);
           history.push("/dashboard");
         }, {
           method : "PATCH"

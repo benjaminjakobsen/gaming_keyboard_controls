@@ -15,7 +15,7 @@ const pages = {
 
 function SidePanel(props){
   const history = useHistory();
-  const user = { // should be recieved from props
+  /*const user = { // should be recieved from props
     name : "William",
     points : "100",
     rank : "1",
@@ -25,18 +25,19 @@ function SidePanel(props){
       "3" : false,
       "4" : false
     }
-  }
+  }*/
+  const user = props.user;
   return (
     <div className={"SidePanel-container"}>
       <div><div onClick={() =>{
         history.push(`/dashboard/${pages.EDITPROFILE}`)
-      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Username: {user.name}</div></div>
+      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Username: {user.username}</div></div>
       <div><div onClick={() =>{
         history.push(`/dashboard/${pages.STATS}`)
       }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Points: {user.points} </div></div>
       <div><div onClick={() =>{
         history.push(`/dashboard/${pages.LEADERBOARD}`)
-      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Global rank: {user.rank}</div></div>
+      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Global rank: {user.rank ? user.rank : "unset"}</div></div>
       <div style={{
         borderBottom : "2px solid black",
         width : "100%",

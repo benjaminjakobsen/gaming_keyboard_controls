@@ -24,6 +24,7 @@ const pages = {
 }
 
 function DashBoardScreen(props){
+  const history = useHistory();
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
   const [challenges, setChallenges] = useState([]);
   const [user, setUser] = useState(null);
@@ -35,8 +36,7 @@ function DashBoardScreen(props){
       setUser(res.user)
     })
   }, []);
-  console.log(challenges, user);
-  const history = useHistory();
+  if(!user || !challenges) return <></>;
   return (
     <>
       <div style={{
@@ -47,7 +47,9 @@ function DashBoardScreen(props){
         height : "88vh",
         backgroundColor : "lightgrey",
       }}>
-        <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={EditProfile}/>
+        <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={() => <EditProfile updateHandler={(newUser) => {
+          setUser(newUser)
+        }}/>}/>
         <Route exact path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
         <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
@@ -61,7 +63,7 @@ function DashBoardScreen(props){
         top : "12vh",
         boxShadow: "10px 0px 20px 1px grey"
       }}>
-        <SidePanel user={user}/>
+        <SidePanel user={user} challenges={challenges}/>
       </div>
       <div style={{
         backgroundColor : "black",
