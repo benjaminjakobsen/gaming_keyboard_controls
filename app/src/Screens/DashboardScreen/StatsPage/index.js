@@ -13,6 +13,13 @@ const pages = {
 
 function StatsPage(props){
   const history = useHistory();
+  const user = props.user;
+  let challengesCompleted = 0;
+  let totalChallenges = 0;
+  for(const id in user.challenges){
+    totalChallenges++;
+    if(user.challenges[id].done) challengesCompleted++;
+  }
   return (
     <div className = {"StatsPage-divBox"} style={{
       height : "65vh",
@@ -37,7 +44,7 @@ function StatsPage(props){
       }}>
         <p style={{
           margin : "0"
-        }} className={"StatsPage-text"}>Challenges completed: X/X</p>
+        }} className={"StatsPage-text"}>Challenges completed: {challengesCompleted}/{totalChallenges}</p>
       </div>
       <div style={{
         cursor : "pointer",
@@ -49,7 +56,7 @@ function StatsPage(props){
       }}>
         <p style={{
           margin : "0"
-        }} className={"StatsPage-text"}>Points: Y</p>
+        }} className={"StatsPage-text"}>Points: {user.points}</p>
       </div>
       <div onClick={() =>{
         history.push(`/dashboard/${pages.LEADERBOARD}`)
@@ -63,7 +70,7 @@ function StatsPage(props){
       }}>
         <p style={{
           margin : "0"
-        }}className={"StatsPage-text"}>Rating: Z</p>
+        }}className={"StatsPage-text"}>Rating: unset</p>
       </div>
       <div onClick={() =>{
         history.push(`/dashboard/${pages.LEADERBOARD}`)
@@ -77,7 +84,7 @@ function StatsPage(props){
       }}>
         <p style={{
           margin : "0"
-        }} className={"StatsPage-text"}>Leaderboard Rank: 1</p>
+        }} className={"StatsPage-text"}>Rank: unset</p>
       </div>
       <div style={{
         width : "70%", 

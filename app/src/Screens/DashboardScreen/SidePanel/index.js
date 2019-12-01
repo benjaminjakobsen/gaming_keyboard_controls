@@ -37,7 +37,7 @@ function SidePanel(props){
       }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Points: {user.points} </div></div>
       <div><div onClick={() =>{
         history.push(`/dashboard/${pages.LEADERBOARD}`)
-      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Global rank: {user.rank ? user.rank : "unset"}</div></div>
+      }} className={"SidePanel-centered-item"} style={{cursor : "pointer"}}>Rank: {user.rank ? user.rank : "unset"}</div></div>
       <div style={{
         borderBottom : "2px solid black",
         width : "100%",

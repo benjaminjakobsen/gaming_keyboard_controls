@@ -50,7 +50,7 @@ function DashBoardScreen(props){
         <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={() => <EditProfile updateHandler={(newUser) => {
           setUser(newUser)
         }}/>}/>
-        <Route exact path={`/dashboard/${pages.STATS}`} component={StatsPage}/>
+        <Route exact path={`/dashboard/${pages.STATS}`} component={() => <StatsPage user={user}/>}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
         <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
       </div>
