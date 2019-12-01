@@ -30,6 +30,10 @@ function DashBoardScreen(props){
   const [user, setUser] = useState(null);
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
+      const challengesDict = {};
+      for(let i = 0; i < res.length; i++){
+        challengesDict[res[i].orderingId] = res[i];
+      }
       setChallenges(res.challenges)
     })
     customFetch("/user", {}, (res) => {
@@ -37,6 +41,7 @@ function DashBoardScreen(props){
     })
   }, []);
   if(!user || !challenges) return <></>;
+  console.log(user, challenges)
   return (
     <>
       <div style={{
@@ -52,7 +57,7 @@ function DashBoardScreen(props){
         }}/>}/>
         <Route exact path={`/dashboard/${pages.STATS}`} component={() => <StatsPage user={user}/>}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
-        <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={ChallengesPage}/>
+        <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={() => <ChallengesPage user={user} challenges={challenges}/>}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",

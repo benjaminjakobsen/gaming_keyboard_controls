@@ -5,9 +5,11 @@ import CloseIcon from 'assets/closeIcon.png'
 import Button from 'Components/CustomButton'
 
 function ChallengesPage(props){
+  const challenges = props.challenges;
+  const userChallenges = props.user.challenges;
   const [showSidePanel, setShowSidePanel] = useState(false);
   const [sidePanelChallengeID, setSidePanelChallengeID] = useState(null);
-  const challenges = {1 : {
+  /*const challenges = {1 : {
     title : "challenge 1",
     points : 100,
     orderingId : 1,
@@ -54,7 +56,7 @@ function ChallengesPage(props){
       done : false,
       bestTime : null
     }
-  }
+  }*/
   return (
     <div className={"ChallengesPage-main-container"}>
       <div style={{
@@ -127,7 +129,7 @@ function ChallengesPage(props){
         }} 
           userChallenge={userChallenges[sidePanelChallengeID]} 
           challenge={challenges[sidePanelChallengeID]}
-          canPlay={challenges[sidePanelChallengeID].predecessor == -1 || userChallenges[challenges[sidePanelChallengeID].predecessor].done}
+          canPlay={challenges[sidePanelChallengeID].predecessor == null || userChallenges[challenges[sidePanelChallengeID].predecessor].done}
         />}
       </div>
     </div>
