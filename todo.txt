@@ -2,5 +2,6 @@ FE
     DONE make sure not going to home page every time you reload
 
 BE
-    TODO implement get user
-    TODO implement challenge part of users
+    DONE implement get user
+    DONE implement challenge part of users
+    TODO encrypt passwords
