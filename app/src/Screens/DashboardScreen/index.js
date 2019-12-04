@@ -60,7 +60,7 @@ function DashBoardScreen(props){
         <Route exact path={`/dashboard/${pages.STATS}`} component={() => <StatsPage user={user}/>}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
         <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={() => <ChallengesPage user={user} challenges={challenges}/>}/>
-        <Route exact path={`/dashboard/${pages.GAMEPAGE}`} component={() => <GamePage user={user} challenge={challenges[0]}/>}/>
+        <Route exact path={`/dashboard/${pages.GAMEPAGE}/*`} component={() => <GamePage user={user} challenges={challenges}/>}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",

@@ -3,6 +3,17 @@ import './index.css';
 import CheckIcon from 'assets/checkicon.png'
 import CloseIcon from 'assets/closeIcon.png'
 import Button from 'Components/CustomButton'
+import {
+  useHistory
+} from 'react-router-dom';
+
+const pages = {
+  CHALLENGES : "challenges",
+  STATS : "stats",
+  LEADERBOARD : "leaderboard",
+  EDITPROFILE : "edit-profile",
+  GAMEPAGE : "play"
+}
 
 function ChallengesPage(props){
   const challenges = props.challenges;
@@ -137,6 +148,7 @@ function ChallengesPage(props){
 }
 
 function ChallengeInfo(props){
+  const history = useHistory();
   const userChallenge = props.userChallenge;
   const challenge = props.challenge;
   const canPlay = props.canPlay;
@@ -194,7 +206,9 @@ function ChallengeInfo(props){
         <div style={{
           width : "fit-content", height : "fit-content",
           top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
-        }}><Button style={{
+        }}><Button onClick = {() => {
+          history.push(`/dashboard/${pages.GAMEPAGE}/${challenge.orderingId}`)
+        }}style={{
           height : "5vh",
           width : "10vmax",
           backgroundColor : !canPlay ? "grey" : "#5dd95d",
