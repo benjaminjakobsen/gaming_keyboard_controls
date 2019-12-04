@@ -14,6 +14,7 @@ import StatsPage from './StatsPage'
 import LeaderBoardPage from './LeaderBoardPage'
 import ChallengesPage from './ChallengesPage'
 import customFetch from 'services/requests'
+import GamePage from './GamePage'
 
 // like enumerate types
 const pages = {
@@ -21,6 +22,7 @@ const pages = {
   STATS : "stats",
   LEADERBOARD : "leaderboard",
   EDITPROFILE : "edit-profile",
+  GAMEPAGE : "play"
 }
 
 function DashBoardScreen(props){
@@ -58,6 +60,7 @@ function DashBoardScreen(props){
         <Route exact path={`/dashboard/${pages.STATS}`} component={() => <StatsPage user={user}/>}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
         <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={() => <ChallengesPage user={user} challenges={challenges}/>}/>
+        <Route exact path={`/dashboard/${pages.GAMEPAGE}`} component={() => <GamePage user={user} challenge={challenges[0]}/>}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",
