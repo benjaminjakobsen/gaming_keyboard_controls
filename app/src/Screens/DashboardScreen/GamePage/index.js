@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './index.css';
 import background from 'assets/playBackground.png';
-import icon from 'assets/LuxSquare.png'
+import icon from 'assets/brand_icon.png'
 
 function returnId(props){
   var Id = props.replace('/dashboard/play/','') 
@@ -19,10 +19,17 @@ function GamePage(props){
   console.log(props.challenges)
   var IdForPage = returnId(window.location.pathname)
   var challengeName = props.challenges[IdForPage].title
+  const [commandIndex, setCommandIndex] = useState(-1);
 
   const command = {
     keyCodes : [87, 82, 69]
   }
+  
+  const activateTimer ={
+    keyCodes : [32]
+  }
+  
+
   const [keyMap, setKeyMap] = useState({});
   useEffect(() => {
     window.onkeydown = (e) => {
@@ -50,9 +57,10 @@ function GamePage(props){
     };
   })
 
-  if(checkAllKeys(keyMap, command)){
-
+  if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer)){
+    setCommandIndex(0);
   }
+
 
   if(checkAllKeys(keyMap, command)){
     console.log("DU KLAREDE DET JUBIIII")
@@ -83,7 +91,8 @@ function GamePage(props){
           position : "absolute",
           left : "50%",
           transform : "translateX(-50%)",
-          top : "65%"
+          top : "65%",
+          width : "18%"
         }}></img>
 
         <div style={{
@@ -111,7 +120,32 @@ function GamePage(props){
 
             }}>
               AA</span>
+
         </div>
+        
+
+        {commandIndex == -1 &&
+          <div style = {{
+            position : "absolute",
+            top : "0",
+            right : "0",
+            left : "0",
+            bottom : "20vh",
+            fontWeight : "700",
+            fontSize : "2rem",
+            margin : "auto",
+            width : "fit-content",
+            height : "fit-content",
+              
+    
+          }}>
+            <h2 style={{textAlign :"center", color : "white"}}>Press spacebar to start!</h2>
+          </div>
+        }
+        
+          
+        
+        
       
       
       </div>
