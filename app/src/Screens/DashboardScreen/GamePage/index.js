@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './index.css';
 import background from 'assets/playBackground.png';
-import icon from 'assets/LuxSquare.png'
+import icon from 'assets/brand_icon.png'
 
 function returnId(props){
   var Id = props.replace('/dashboard/play/','') 
@@ -18,9 +18,10 @@ const checkAllKeys = (keyMap, command) => {
 function GamePage(props){
   // find challenge to play : DONE
   // validate that user has access to challenge : DONE
-  // wait for space press and set the first command and start time
+  // wait for space press and set the first command and start time : DONE
   // update command when keyCodes are pressed
   // when last command is done: stop time and show points gained in an congratulations page and update backend.
+  const [commandIndex, setCommandIndex] = useState(-1);
 
   const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
@@ -28,6 +29,12 @@ function GamePage(props){
   const command = {
     keyCodes : [87, 82, 69]
   }
+  
+  const activateTimer ={
+    keyCodes : [32]
+  }
+  
+
   const [keyMap, setKeyMap] = useState({});
   useEffect(() => {
     window.onkeydown = (e) => {
@@ -55,14 +62,18 @@ function GamePage(props){
     };
   })
 
-  if(checkAllKeys(keyMap, command)){
-    console.log("DU KLAREDE DET JUBIIII")
-  }
-
   if(!challenge || !user) return <></>;
 
   if(challenge.predecessor != null && !user.challenges[challenge.predecessor].done){
     return <div>You found away around our frontend security. However we predicted you :) Please complete all previous challenges before trying this one.</div>
+  }
+
+  if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer)){
+    setCommandIndex(0);
+  }
+
+  if(checkAllKeys(keyMap, command)){
+    console.log("DU KLAREDE DET JUBIIII")
   }
   return (
     <>
@@ -88,7 +99,8 @@ function GamePage(props){
           position : "absolute",
           left : "50%",
           transform : "translateX(-50%)",
-          top : "65%"
+          top : "65%",
+          width : "18%"
         }}></img>
 
         <div style={{
@@ -116,7 +128,26 @@ function GamePage(props){
 
             }}>
               AA</span>
+
         </div>
+        {commandIndex == -1 &&
+          <div style = {{
+            position : "absolute",
+            top : "0",
+            right : "0",
+            left : "0",
+            bottom : "20vh",
+            fontWeight : "700",
+            fontSize : "2rem",
+            margin : "auto",
+            width : "fit-content",
+            height : "fit-content",
+              
+    
+          }}>
+            <h2 style={{textAlign :"center", color : "white"}}>Press spacebar to start!</h2>
+          </div>
+        }
       </div>
     </>)
 }
