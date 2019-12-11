@@ -16,10 +16,15 @@ const checkAllKeys = (keyMap, command) => {
 }
 
 function GamePage(props){
-  console.log(props.challenges)
-  var IdForPage = returnId(window.location.pathname)
-  var challengeName = props.challenges[IdForPage].title
+  // find challenge to play : DONE
+  // validate that user has access to challenge : DONE
+  // wait for space press and set the first command and start time
+  // update command when keyCodes are pressed
+  // when last command is done: stop time and show points gained in an congratulations page and update backend.
 
+  const challengeID = returnId(window.location.pathname)
+  const challenge = props.challenges[challengeID];
+  const user = props.user;
   const command = {
     keyCodes : [87, 82, 69]
   }
@@ -51,17 +56,17 @@ function GamePage(props){
   })
 
   if(checkAllKeys(keyMap, command)){
-
-  }
-
-  if(checkAllKeys(keyMap, command)){
     console.log("DU KLAREDE DET JUBIIII")
   }
 
-  console.log(keyMap)
+  if(!challenge || !user) return <></>;
+
+  if(challenge.predecessor != null && !user.challenges[challenge.predecessor].done){
+    return <div>You found away around our frontend security. However we predicted you :) Please complete all previous challenges before trying this one.</div>
+  }
   return (
     <>
-      <h1 style={{textAlign :"center", height : "10vh"}}>Welcome to {challengeName}</h1>
+      <h1 style={{textAlign :"center", height : "10vh"}}>Welcome to {challenge.name}</h1>
 
       <div style={{
         height : "60vh",
@@ -112,8 +117,6 @@ function GamePage(props){
             }}>
               AA</span>
         </div>
-      
-      
       </div>
     </>)
 }
