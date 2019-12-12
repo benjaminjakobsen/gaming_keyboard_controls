@@ -26,14 +26,12 @@ function GamePage(props){
   const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
   const user = props.user;
-  const command = {
-    keyCodes : [87, 82, 69]
-  }
+
+  const command = challenge.commands.length == commandIndex ? challenge.commands[commandIndex] : null;
   
   const activateTimer ={
     keyCodes : [32]
   }
-  
 
   const [keyMap, setKeyMap] = useState({});
   useEffect(() => {
@@ -71,8 +69,8 @@ function GamePage(props){
   if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer)){
     setCommandIndex(0);
   }
-
-  if(checkAllKeys(keyMap, command)){
+  if(command && checkAllKeys(keyMap, command)){
+    setCommandIndex(commandIndex + 1);
     console.log("DU KLAREDE DET JUBIIII")
   }
   return (
@@ -101,8 +99,7 @@ function GamePage(props){
           transform : "translateX(-50%)",
           top : "65%",
           width : "18%"
-        }}></img>
-
+        }}/>
         <div style={{
           position : "absolute",
           top :"65%",
@@ -126,9 +123,9 @@ function GamePage(props){
             fontWeight : "700",
             fontSize : "2rem"
 
-            }}>
-              AA</span>
-
+          }}>
+              AA
+          </span>
         </div>
         {commandIndex == -1 &&
           <div style = {{
@@ -141,9 +138,7 @@ function GamePage(props){
             fontSize : "2rem",
             margin : "auto",
             width : "fit-content",
-            height : "fit-content",
-              
-    
+            height : "fit-content"
           }}>
             <h2 style={{textAlign :"center", color : "white"}}>Press spacebar to start!</h2>
           </div>
