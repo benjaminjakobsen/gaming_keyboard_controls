@@ -4,18 +4,18 @@ import './index.css';
 function CustomButton(props){
   return (
     <div className={"CustomButton-container " + (props.disabled ? "" : "CustomButton-hover-effect")} style={{
-      color : props.disabled ? "lightgrey" : "white",
       fontSize : "1.5rem",
       width: "fit-content",
       height : "fit-content",
       fontWeight: "bold",
-      backgroundColor : props.disabled ? "grey" : "rgb(0, 80, 0)",
       padding : "10px",
       borderRadius : "10px",
-      cursor : props.disabled ? "unset" : "pointer",
       textAlign : "center",
       position : "relative",
-      ...props.style
+      ...props.style,
+      cursor : props.disabled ? "unset" : props.style && props.style.cursor ? props.style.cursor : "pointer",
+      backgroundColor : props.disabled ? "grey" : props.style && props.style.backgroundColor ? props.style.backgroundColor : "rgb(0, 80, 0)",
+      color : props.disabled ? "lightgrey" : props.style && props.style.color ? props.style.color : "white"
     }} onClick={() => {
       if(props.onClick && !props.disabled) props.onClick()
     }}>

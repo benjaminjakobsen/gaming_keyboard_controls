@@ -55,7 +55,7 @@ function SidePanel(props){
           width : "16vw",
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
-          height : "5vh"
+          height : "5vh",
         }} onClick={() => {
           history.push(`/dashboard/play/${currentOrderingID}`)
           props.resetChallengePage()
@@ -79,8 +79,6 @@ function SidePanel(props){
           width : "16vw",
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
-          backgroundColor : "lightgrey",
-          color : "grey",
           height : "5vh"
         }}> Next challenge</Button>
       </div></div>

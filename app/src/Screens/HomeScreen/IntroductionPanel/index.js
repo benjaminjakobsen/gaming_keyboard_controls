@@ -21,7 +21,7 @@ function IntroductionPanel(props){
           color: "white"
         }}>
           <h2>Introduction</h2>
-          On this page you will put through a number of tests to improve your abilities to use a keyboard. Enjoy!
+          On this page you will put through a number of tests to improve your abilities to use a keyboard in League of legends. Enjoy!
         </div>
 
         <div style={{
@@ -30,8 +30,8 @@ function IntroductionPanel(props){
             margin: "6vh auto",
           }}>
             <Button style={{
-              width : "15vmax",
-              height : "5vmax",
+              width : "10vmax",
+              height : "3vmax",
             }} onClick={() => props.buttonClickHandler()}>Go to login</Button>
         </div>
       </div>
