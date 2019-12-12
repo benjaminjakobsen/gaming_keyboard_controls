@@ -39,10 +39,22 @@ function DashBoardScreen(props){
       setChallenges(res.challenges)
     })
     customFetch("/user", {}, (res) => {
-      setUser(res.user)
+      setUser({
+        ...res.user,
+        points : -1
+      })
     })
   }, []);
   if(!user || !challenges) return <></>;
+  user.points = (() => {
+    let res = 0;
+    for(const orderingID in user.challenges){
+      if(user.challenges[orderingID].done){
+        res += challenges[orderingID].points;
+      }
+    }
+    return res;
+  })();
   console.log(user, challenges)
   return (
     <>

@@ -190,8 +190,7 @@ function GamePage(props){
             margin : "auto",
             fontWeight : "700",
             fontSize : "2rem",
-          }}>
-            {challenge.commands[commandIndex].description}
+          }} dangerouslySetInnerHTML={{__html: challenge.commands[commandIndex].description}}>
           </span>
           
         </div>}
