@@ -15,12 +15,26 @@ const checkAllKeys = (keyMap, command) => {
   return true;
 }
 
+const countWrongKeys = (keyMap, command) => {
+  let setOfCommandKeys = {};
+  for(let i = 0; i < command.keyCodes.length; i++) setOfCommandKeys[command.keyCodes[i]] = true;
+  let count = 0;
+  for(const key in keyMap){
+    if(!setOfCommandKeys[key]) count++;
+  }
+  return count;
+};
+
+/*
+* DONE: find challenge to play
+* DONE: validate that user has access to challenge
+* DONE: wait for space press and set the first command and start time
+* DONE: update command when keyCodes are pressed
+* when last command is done: stop time and show points gained in an congratulations page and update backend.
+* render whether the user pressed any wrong keys using countWrongKeys function. This should be done for both the activateTimer and command.
+*/
+
 function GamePage(props){
-  // find challenge to play : DONE
-  // validate that user has access to challenge : DONE
-  // wait for space press and set the first command and start time : DONE
-  // update command when keyCodes are pressed : DONE
-  // when last command is done: stop time and show points gained in an congratulations page and update backend.
   const [commandIndex, setCommandIndex] = useState(-1);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -62,25 +76,27 @@ function GamePage(props){
     };
   })
 
-  if(!challenge || !user) return <></>;
-
+  if(!challenge || !user){
+    return <></>;
+  }
   if(challenge.predecessor != null && !user.challenges[challenge.predecessor].done){
     return <div>You found away around our frontend security. However we predicted you :) Please complete all previous challenges before trying this one.</div>
   }
-
-  if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer)){
-    console.log("wdhwbd")
+  if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer) && countWrongKeys(keyMap, activateTimer) == 0){
+    console.log("started game")
     setCommandIndex(0);
     setStartTime((new Date()).toISOString());
   }
-  if(command && checkAllKeys(keyMap, command)){
+  if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, command) == 0){
     setCommandIndex(commandIndex + 1);
-    console.log("DU KLAREDE DET JUBIIII")
+    console.log("command done")
   }
   if(commandIndex == challenge.commands.length && !endTime){
     setEndTime((new Date()).toISOString());
+    console.log("finished game")
   }
-  const totalTime = endTime && startTime ? endTime.getTime() - startTime.getTime() : null;
+  const totalTime = endTime && startTime ? (new Date(endTime)).getTime() - (new Date(startTime)).getTime() : null;
+  console.log(totalTime)
   return (
     <>
     {challenge.commands.length != commandIndex &&
@@ -135,7 +151,6 @@ function GamePage(props){
             bottom : "0",
             fontWeight : "700",
             fontSize : "2rem"
-
           }}>
               AA
           </span>
