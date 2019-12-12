@@ -23,9 +23,12 @@ const checkAllKeys = (keyMap, command) => {
   return true;
 }
 
-const countWrongKeys = (keyMap, command) => {
+const countWrongKeys = (keyMap, commandIndex, commands) => {
   let setOfCommandKeys = {};
-  for(let i = 0; i < command.keyCodes.length; i++) setOfCommandKeys[command.keyCodes[i]] = true;
+  for(let i = 0; i <= commandIndex; i++){
+    const command = commands[i];
+    for(let j = 0; j < command.keyCodes.length; j++) setOfCommandKeys[command.keyCodes[j]] = true;
+  }
   let count = 0;
   for(const key in keyMap){
     if(keyMap[key] && !setOfCommandKeys[key]) count++;
@@ -93,7 +96,7 @@ function GamePage(props){
   if(challenge.predecessor != null && !userChallenges[challenge.predecessor].done){
     return <div>You found away around our frontend security. However we predicted you :) Please complete all previous challenges before trying this one.</div>
   }
-  if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer) && countWrongKeys(keyMap, activateTimer) == 0){
+  if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer) && countWrongKeys(keyMap, 0, [activateTimer]) == 0){
     console.log("started game")
     setState({
       commandIndex : 0,
@@ -101,7 +104,7 @@ function GamePage(props){
       indexTime : (new Date()).toISOString()
     });
   }
-  if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, command) == 0){
+  if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, commandIndex, challenge.commands) == 0){
     setState({
       commandIndex : commandIndex + 1,
       indexTime : (new Date()).toISOString()
@@ -185,7 +188,7 @@ function GamePage(props){
         margin : "auto",
         borderRadius : "20px",
         overflow : "hidden",
-        boxShadow : checkIndexTime > 50 && ((command && countWrongKeys(keyMap, command) > 0) || (commandIndex == -1 && countWrongKeys(keyMap, activateTimer) > 0)) ? "0px 0px 10px 2px red" : "0px 0px 10px 2px black",
+        boxShadow : checkIndexTime > 50 && ((command && countWrongKeys(keyMap, commandIndex, challenge.commands) > 0) || (commandIndex == -1 && countWrongKeys(keyMap, activateTimer) > 0)) ? "0px 0px 10px 2px red" : "0px 0px 10px 2px black",
         position : "relative"
       }}>
         <img src={background} style={{
