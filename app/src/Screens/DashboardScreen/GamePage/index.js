@@ -4,7 +4,7 @@ import background from 'assets/playBackground.png';
 import brand from 'assets/brand_icon.png';
 import velkoz from 'assets/velkoz_icon.png';
 import customFetch from 'services/requests'
-import {useHistory} from 'react-router-dom'
+import Button from 'Components/CustomButton'
 
 const icons = {
   brand : brand,
@@ -117,9 +117,8 @@ function GamePage(props){
       const userCopy = {
         challenges : JSON.parse(JSON.stringify(userChallenges)) // deep copy object
       }
-      userCopy.challenges[challengeID].done = true;
       userCopy.challenges[challengeID].bestTime = Math.min(
-        userCopy.challenges[challengeID].done ? userCopy.challenges[challengeID].bestTime : (1 << 31),
+        userChallenges[challengeID].done ? userChallenges[challengeID].bestTime : 10000000,
         totalTime
       );
       userCopy.challenges[challengeID].done = true;
@@ -156,8 +155,20 @@ function GamePage(props){
           <h2>Time to beat was {challenge.timeLimitToPass}ms</h2>
           <h2>Your total time was {totalTime}ms</h2>
         </div>
-
       </div>}
+      <Button style={{
+        width : "20vw",
+        height : "5vh",
+        margin : "5vh auto"
+      }} onClick={() => {
+        setState({
+          commandIndex : -1,
+          startTime : null,
+          endTime : null,
+          indexTime : null,
+          keyMap : {}
+        })
+      }}>replay</Button>
     </>
     )
   }

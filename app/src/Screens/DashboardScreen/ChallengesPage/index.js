@@ -194,7 +194,7 @@ function ChallengeInfo(props){
           </tr>
           <tr>
             <td>Status</td>
-            <td>{userChallenge.done ? "completed" : "uncompleted"}</td>
+            <td>{userChallenge.done ? "completed" : "not completed"}</td>
           </tr>
           <tr>
             <td>{"Best time"}</td>
