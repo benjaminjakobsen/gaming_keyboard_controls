@@ -27,7 +27,7 @@ function GamePage(props){
   const challenge = props.challenges[challengeID];
   const user = props.user;
 
-  const command = challenge.commands.length == commandIndex ? challenge.commands[commandIndex] : null;
+  const command = challenge.commands.length != commandIndex && commandIndex != -1 ? challenge.commands[commandIndex] : null;
   
   const activateTimer ={
     keyCodes : [32]
@@ -75,7 +75,12 @@ function GamePage(props){
   }
   return (
     <>
-      <h1 style={{textAlign :"center", height : "10vh"}}>Welcome to {challenge.name}</h1>
+    {challenge.commands.length != commandIndex &&
+      <h1 style={{textAlign :"center", height : "10vh"}}>Welcome to {challenge.title}</h1>
+    }
+    {challenge.commands.length == commandIndex &&
+      <h1 style={{textAlign :"center", height : "10vh"}}>You have completed {challenge.title}!</h1>
+    }
 
       <div style={{
         height : "60vh",
