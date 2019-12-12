@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import './index.css';
 import background from 'assets/playBackground.png';
-import icon from 'assets/brand_icon.png'
+import brand from 'assets/brand_icon.png';
+import velkoz from 'assets/velkoz_icon.png';
 import customFetch from 'services/requests'
 import {useHistory} from 'react-router-dom'
+
+const icons = {
+  brand : brand,
+  velkoz : velkoz
+}
 
 function returnId(props){
   var Id = props.replace('/dashboard/play/','') 
@@ -45,6 +51,8 @@ function GamePage(props){
   const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
   const user = props.user;
+  const icon = icons[challenge.champion];
+ 
 
   const command = challenge.commands.length != commandIndex && commandIndex != -1 ? challenge.commands[commandIndex] : null;
   
@@ -209,7 +217,7 @@ function GamePage(props){
           top :"25%",
           left : "45%",
           height : "16%",
-          width : "10%",
+          width : "fit-content",
           borderRadius : "10px",
           textAlign : "center",
         }}>
