@@ -56,10 +56,13 @@ function DashBoardScreen(props){
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
       const challengesDict = {};
-      for(let i = 0; i < res.length; i++){
-        challengesDict[res[i].orderingId] = res[i];
+      for(let i = 0; i < res.challenges.length; i++){
+        challengesDict[res.challenges[i].orderingId] = {
+          ...res.challenges[i],
+          title : res.challenges[i].title + (res.challenges[i].isPractice ? " (practice)" : "")
+        };
       }
-      setChallenges(res.challenges)
+      setChallenges(challengesDict)
     })
     customFetch("/user", {}, (res) => {
       setUser({
@@ -68,7 +71,9 @@ function DashBoardScreen(props){
       })
     })
   }, []);
-  if(!user || !challenges) return <></>;
+  console.log(user, challenges)
+  if(user === null || challenges === null) return <></>;
+  console.log("test")
   user.points = (() => {
     let res = 0;
     for(const orderingID in user.challenges){
