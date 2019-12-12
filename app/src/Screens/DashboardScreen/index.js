@@ -93,7 +93,16 @@ function DashBoardScreen(props){
         }}/>}/>
         <Route exact path={`/dashboard/${pages.STATS}`} render={(props) => <StatsPage {...props} user={user} />}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
-        <Route exact path={`/dashboard/${pages.CHALLENGES}`} render={(props) => <ChallengesPage {...props}  challenges={challenges} user={user}/>}/>
+        <Route exact path={`/dashboard/${pages.CHALLENGES}`} render={(props) => <ChallengesPage challenges={challenges} user={user} resetChallengePage={() => {
+          setChallengePageState({
+            commandIndex : -1,
+            startTime : null,
+            endTime : null,
+            indexTime : null,
+            keyMap : {},
+            challengeID : returnId()
+          })
+        }} {...props}/>}/>
         <Route exact path={`/dashboard/${pages.GAMEPAGE}/*`} render={(props) => <GamePage {...props} challenges={challenges} state={challengePageState} setState={(newState) => {
           setChallengePageState((prevState) => {
             return {

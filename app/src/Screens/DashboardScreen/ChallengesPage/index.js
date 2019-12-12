@@ -68,6 +68,7 @@ function ChallengesPage(props){
       bestTime : null
     }
   }*/
+  console.log(props)
   return (
     <div className={"ChallengesPage-main-container"}>
       <div style={{
@@ -135,7 +136,7 @@ function ChallengesPage(props){
         position : "relative",
         backgroundColor : "#6688c4"
       }}>
-        {showSidePanel && <ChallengeInfo closeHandler={() => {
+        {showSidePanel && <ChallengeInfo resetChallengePage={props.resetChallengePage} closeHandler={() => {
           setShowSidePanel(false)
         }} 
           userChallenge={userChallenges[sidePanelChallengeID]} 
@@ -208,6 +209,8 @@ function ChallengeInfo(props){
           top : "0", right : "0", bottom : "0", left : "0", margin : "auto", position : "absolute"
         }}><Button onClick = {() => {
           history.push(`/dashboard/${pages.GAMEPAGE}/${challenge.orderingId}`)
+          console.log(props)
+          props.resetChallengePage();
         }}style={{
           height : "5vh",
           width : "10vmax",
