@@ -15,7 +15,7 @@ export default function(url, body, handler, userOptions = {}){
         if(res.ok){
             return res.json();
         }else{
-            //document.location.pathname = "/";
+            document.location.pathname = "/";
         }
     }).then((res) => {
         handler(res);

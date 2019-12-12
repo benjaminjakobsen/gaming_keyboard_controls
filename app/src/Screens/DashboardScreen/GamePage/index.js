@@ -19,15 +19,17 @@ function GamePage(props){
   // find challenge to play : DONE
   // validate that user has access to challenge : DONE
   // wait for space press and set the first command and start time : DONE
-  // update command when keyCodes are pressed
+  // update command when keyCodes are pressed : DONE
   // when last command is done: stop time and show points gained in an congratulations page and update backend.
   const [commandIndex, setCommandIndex] = useState(-1);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
   const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
   const user = props.user;
 
-  const command = challenge.commands.length == commandIndex ? challenge.commands[commandIndex] : null;
+  const command = challenge.commands.length != commandIndex && challenge.commands.length != -1 ? challenge.commands[commandIndex] : null;
   
   const activateTimer ={
     keyCodes : [32]
@@ -67,12 +69,18 @@ function GamePage(props){
   }
 
   if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer)){
+    console.log("wdhwbd")
     setCommandIndex(0);
+    setStartTime((new Date()).toISOString());
   }
   if(command && checkAllKeys(keyMap, command)){
     setCommandIndex(commandIndex + 1);
     console.log("DU KLAREDE DET JUBIIII")
   }
+  if(commandIndex == challenge.commands.length && !endTime){
+    setEndTime((new Date()).toISOString());
+  }
+  const totalTime = endTime && startTime ? endTime.getTime() - startTime.getTime() : null;
   return (
     <>
       <h1 style={{textAlign :"center", height : "10vh"}}>Welcome to {challenge.name}</h1>
