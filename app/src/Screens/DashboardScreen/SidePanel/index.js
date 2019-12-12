@@ -26,12 +26,12 @@ function SidePanel(props){
       "4" : false
     }
   }*/
+  // fix the below (is assumes some sort of sorting of the dictionary)
   const user = props.user;
   let currentOrderingID = -1;
   for(const orderingID in props.user.challenges){
     if(props.user.challenges[orderingID].done){
       currentOrderingID = orderingID;
-      break;
     }
   }
   return (

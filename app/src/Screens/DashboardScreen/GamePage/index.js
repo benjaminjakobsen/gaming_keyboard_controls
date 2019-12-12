@@ -120,7 +120,9 @@ function GamePage(props){
   }
   if(commandIndex == challenge.commands.length && !endTime){
     setState({
-      endTime : (new Date()).toISOString()
+      endTime : (new Date()).toISOString(),
+      isReplay : userChallenges[challengeID].done,
+      previousTime :  userChallenges[challengeID].bestTime
     });
     const totalTime = (new Date()).getTime() - (new Date(startTime)).getTime();
     if(challenge.isPractice || totalTime <= challenge.timeLimitToPass){
@@ -145,7 +147,21 @@ function GamePage(props){
   if(totalTime){
     return (
     <>
-      {((totalTime < challenge.timeLimitToPass) || (challenge.timeLimitToPass == null)) &&
+      {((totalTime <= challenge.timeLimitToPass || challenge.isPractice) && state.isReplay && totalTime < state.previousTime) &&
+      <div>
+        <div style={{textAlign:"center", marginTop : "10vh"}}>
+          <h2 style={{margintop : "10vh"}}>You got a personal best. Your previous personal best was {state.previousTime} ms</h2>
+          <h2>Your total time was {totalTime}ms</h2>
+        </div>
+      </div>}
+      {((totalTime <= challenge.timeLimitToPass || challenge.isPractice) && state.isReplay && totalTime >= state.previousTime) &&
+      <div>
+        <div style={{textAlign:"center", marginTop : "10vh"}}>
+          <h2 style={{margintop : "10vh"}}>You dit not get a personal best. Your personal best is {state.previousTime} ms</h2>
+          <h2>Your total time was {totalTime}ms</h2>
+        </div>
+      </div>}
+      {(!state.isReplay && (totalTime <= challenge.timeLimitToPass || challenge.isPractice)) &&
       <div>
         <div style={{textAlign:"center", marginTop : "5vh"}}>
           <h1>You have completed {challenge.title}</h1>
@@ -155,13 +171,13 @@ function GamePage(props){
           <h2>Your total time was {totalTime}ms</h2>
         </div>
       </div>}
-      {((totalTime > challenge.timeLimitToPass) && (challenge.timeLimitToPass != null)) &&
+      {(totalTime > challenge.timeLimitToPass && !challenge.isPractice) &&
       <div>
         <div style={{textAlign:"center", marginTop : "5vh"}}>
           <h1>You have failed {challenge.title}</h1>
         </div>
         <div style={{textAlign:"center", marginTop : "10vh"}}>
-          <h2 style={{margintop : "10vh"}}>You gained 0 points</h2>
+          {!state.isReplay && <h2 style={{margintop : "10vh"}}>You gained 0 points</h2>}
           <h2>Time to beat was {challenge.timeLimitToPass}ms</h2>
           <h2>Your total time was {totalTime}ms</h2>
         </div>
