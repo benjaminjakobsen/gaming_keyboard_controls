@@ -43,40 +43,41 @@ const countWrongKeys = (keyMap, command) => {
 */
 
 function GamePage(props){
-  const [commandIndex, setCommandIndex] = useState(-1);
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
-  const [indexTime, setIndexTime] = useState(null);
+  const state = props.state;
+  const setState = props.setState;
+  const commandIndex = state.commandIndex;
+  const startTime = state.startTime;
+  const endTime = state.endTime;
+  const indexTime = state.indexTime;
+  const keyMap = state.keyMap;
 
   const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
-  const user = props.user;
+  const userChallenges = props.userChallenges;
   const icon = icons[challenge.champion];
  
-
   const command = challenge.commands.length != commandIndex && commandIndex != -1 ? challenge.commands[commandIndex] : null;
   
   const activateTimer ={
     keyCodes : [32]
   }
-  const [keyMap, setKeyMap] = useState({});
   useEffect(() => {
     window.onkeydown = (e) => {
       if(keyMap[e.keyCode]) return;
-      setKeyMap((prevKeyMap) => {
-        const newKeyMap = {...prevKeyMap};
-        newKeyMap[e.keyCode] = true;
-        return newKeyMap;
-      })
+      const newKeyMap = {...keyMap};
+      newKeyMap[e.keyCode] = true;
+      setState({
+        keyMap : newKeyMap
+      });
     }
   })
   useEffect(() => {
     window.onkeyup = (e) => {
-      setKeyMap((prevKeyMap) => {
-        const newKeyMap = {...prevKeyMap};
-        newKeyMap[e.keyCode] = false;
-        return newKeyMap;
-      })
+      const newKeyMap = {...keyMap};
+      newKeyMap[e.keyCode] = false;
+      setState({
+        keyMap : newKeyMap
+      });
     }
   })
   useEffect(() => {
@@ -86,36 +87,44 @@ function GamePage(props){
     };
   })
 
-  if(!challenge || !user){
+  if(!challenge || !userChallenges){
     return <></>;
   }
-  if(challenge.predecessor != null && !user.challenges[challenge.predecessor].done){
+  if(challenge.predecessor != null && !userChallenges[challenge.predecessor].done){
     return <div>You found away around our frontend security. However we predicted you :) Please complete all previous challenges before trying this one.</div>
   }
   if(commandIndex == -1 && checkAllKeys(keyMap, activateTimer) && countWrongKeys(keyMap, activateTimer) == 0){
     console.log("started game")
-    setCommandIndex(0);
-    setStartTime((new Date()).toISOString());
-    setIndexTime((new Date()).toISOString())
+    setState({
+      commandIndex : 0,
+      startTime : (new Date()).toISOString(),
+      indexTime : (new Date()).toISOString()
+    });
   }
   if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, command) == 0){
-    setCommandIndex(commandIndex + 1);
-    setIndexTime((new Date()).toISOString());
+    setState({
+      commandIndex : commandIndex + 1,
+      indexTime : (new Date()).toISOString()
+    })
     console.log("command done")
   }
   if(commandIndex == challenge.commands.length && !endTime){
-    setEndTime((new Date()).toISOString());
+    setState({
+      endTime : (new Date()).toISOString()
+    });
     const totalTime = (new Date()).getTime() - (new Date(startTime)).getTime();
     if(challenge.isPractice || totalTime <= challenge.timeLimitToPass){
       const userCopy = {
-        challenges : JSON.parse(JSON.stringify(user.challenges)) // deep copy object
+        challenges : JSON.parse(JSON.stringify(userChallenges)) // deep copy object
       }
       userCopy.challenges[challengeID].done = true;
       userCopy.challenges[challengeID].bestTime = Math.max(
         userCopy.challenges[challengeID].bestTime,
         totalTime
       );
-      customFetch("/users", userCopy, () => {}, {method : "PATCH"});
+      customFetch("/users", userCopy, (res) => {
+        props.updateHandler(res.user);
+      }, {method : "PATCH"});
     }
     console.log("finished game")
   }
@@ -125,7 +134,7 @@ function GamePage(props){
   
   if(totalTime){
     return (
-      <>
+    <>
       {((totalTime < challenge.timeLimitToPass) || (challenge.timeLimitToPass == null)) &&
       <div>
         <div style={{textAlign:"center", marginTop : "5vh"}}>
@@ -136,7 +145,6 @@ function GamePage(props){
           <h2>Your total time was {totalTime}ms</h2>
         </div>
       </div>}
-      
       {((totalTime > challenge.timeLimitToPass) && (challenge.timeLimitToPass != null)) &&
       <div>
         <div style={{textAlign:"center", marginTop : "5vh"}}>
@@ -149,8 +157,7 @@ function GamePage(props){
         </div>
 
       </div>}
-      </>
-
+    </>
     )
   }
   else{

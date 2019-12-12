@@ -5,7 +5,7 @@ import SidePanel from './SidePanel';
 import Dropdown from './Dropdown'
 import Logo from 'assets/logo.png'
 import {
-  useHistory,
+  useHistory, useLocation,
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
@@ -30,6 +30,13 @@ function DashBoardScreen(props){
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
   const [challenges, setChallenges] = useState(null);
   const [user, setUser] = useState(null);
+  const [challengePageState, setChallengePageState] = useState({
+    commandIndex : -1,
+    startTime : null,
+    endTime : null,
+    indexTime : null,
+    keyMap : {}
+  });
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
       const challengesDict = {};
@@ -55,7 +62,6 @@ function DashBoardScreen(props){
     }
     return res;
   })();
-  console.log(user, challenges)
   return (
     <>
       <div style={{
@@ -69,10 +75,19 @@ function DashBoardScreen(props){
         <Route exact path={`/dashboard/${pages.EDITPROFILE}`} component={() => <EditProfile updateHandler={(newUser) => {
           setUser(newUser)
         }}/>}/>
-        <Route exact path={`/dashboard/${pages.STATS}`} component={() => <StatsPage user={user}/>}/>
+        <Route exact path={`/dashboard/${pages.STATS}`} render={(props) => <StatsPage {...props} user={user} />}/>
         <Route exact path={`/dashboard/${pages.LEADERBOARD}`} component={LeaderBoardPage}/>
-        <Route exact path={`/dashboard/${pages.CHALLENGES}`} component={() => <ChallengesPage user={user} challenges={challenges}/>}/>
-        <Route exact path={`/dashboard/${pages.GAMEPAGE}/*`} component={() => <GamePage user={user} challenges={challenges} />}/>
+        <Route exact path={`/dashboard/${pages.CHALLENGES}`} render={(props) => <ChallengesPage {...props}  challenges={challenges} user={user}/>}/>
+        <Route exact path={`/dashboard/${pages.GAMEPAGE}/*`} render={(props) => <GamePage {...props} challenges={challenges} state={challengePageState} setState={(newState) => {
+          setChallengePageState((prevState) => {
+            return {
+              ...prevState,
+              ...newState
+            }
+          })
+        }} userChallenges={user.challenges} updateHandler={(newUser) => {
+          setUser(newUser)
+        }}/>}/>
       </div>
       <div style={{
         backgroundColor : "#344a35",
