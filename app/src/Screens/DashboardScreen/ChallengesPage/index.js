@@ -198,7 +198,7 @@ function ChallengeInfo(props){
           </tr>
           <tr>
             <td>{"Best time"}</td>
-            <td>{userChallenge.done ? userChallenge.bestTime + " seconds" : "Infinitely many seconds"}</td>
+            <td>{userChallenge.done ? userChallenge.bestTime + " ms" : "infinite"}</td>
           </tr>
         </tbody>
       </table>
