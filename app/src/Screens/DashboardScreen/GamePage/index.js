@@ -140,6 +140,34 @@ function GamePage(props){
               AA
           </span>
         </div>
+        {(commandIndex > -1 && challenge.commands.length != commandIndex) &&     
+         <div style = {{
+          position : "absolute",
+          margin : "auto",
+          backgroundColor : "darkgrey",
+          top :"25%",
+          left : "45%",
+          height : "16%",
+          width : "10%",
+          borderRadius : "10px",
+          textAlign : "center",
+        }}>
+          <span style ={{
+            position : "absolute",
+            width : "fit-content",
+            height : "fit-content",
+            top : "30%",
+            right : "0",
+            left : "0",
+            bottom : "40%",
+            margin : "auto",
+            fontWeight : "700",
+            fontSize : "2rem",
+          }}>
+            {challenge.commands[commandIndex].description}
+          </span>
+          
+        </div>}
         {commandIndex == -1 &&
           <div style = {{
             position : "absolute",
