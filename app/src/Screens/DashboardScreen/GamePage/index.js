@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './index.css';
 import background from 'assets/playBackground.png';
 import icon from 'assets/brand_icon.png'
+import customFetch from 'services/requests'
+import {useHistory} from 'react-router-dom'
 
 function returnId(props){
   var Id = props.replace('/dashboard/play/','') 
@@ -48,7 +50,6 @@ function GamePage(props){
   const activateTimer ={
     keyCodes : [32]
   }
-
   const [keyMap, setKeyMap] = useState({});
   useEffect(() => {
     window.onkeydown = (e) => {
@@ -87,17 +88,27 @@ function GamePage(props){
     setCommandIndex(0);
     setStartTime((new Date()).toISOString());
   }
-  if(command) console.log(countWrongKeys(keyMap, command))
   if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, command) == 0){
     setCommandIndex(commandIndex + 1);
     console.log("command done")
   }
   if(commandIndex == challenge.commands.length && !endTime){
     setEndTime((new Date()).toISOString());
+    const totalTime = (new Date()).getTime() - (new Date(startTime)).getTime();
+    if(challenge.isPractice || totalTime <= challenge.timeLimitToPass){
+      const userCopy = {
+        challenges : JSON.parse(JSON.stringify(user.challenges)) // deep copy object
+      }
+      userCopy.challenges[challengeID].done = true;
+      userCopy.challenges[challengeID].bestTime = Math.max(
+        userCopy.challenges[challengeID].bestTime,
+        totalTime
+      );
+      customFetch("/users", userCopy, () => {}, {method : "PATCH"});
+    }
     console.log("finished game")
   }
   const totalTime = endTime && startTime ? (new Date(endTime)).getTime() - (new Date(startTime)).getTime() : null;
-  console.log(totalTime)
   return (
     <>
     {challenge.commands.length != commandIndex &&
