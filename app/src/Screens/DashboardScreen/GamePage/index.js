@@ -118,10 +118,11 @@ function GamePage(props){
         challenges : JSON.parse(JSON.stringify(userChallenges)) // deep copy object
       }
       userCopy.challenges[challengeID].done = true;
-      userCopy.challenges[challengeID].bestTime = Math.max(
-        userCopy.challenges[challengeID].bestTime,
+      userCopy.challenges[challengeID].bestTime = Math.min(
+        userCopy.challenges[challengeID].done ? userCopy.challenges[challengeID].bestTime : (1 << 31),
         totalTime
       );
+      userCopy.challenges[challengeID].done = true;
       customFetch("/users", userCopy, (res) => {
         props.updateHandler(res.user);
       }, {method : "PATCH"});

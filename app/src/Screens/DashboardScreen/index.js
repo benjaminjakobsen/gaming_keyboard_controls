@@ -37,6 +37,15 @@ function DashBoardScreen(props){
     indexTime : null,
     keyMap : {}
   });
+  if(challengePageState.commandIndex != -1 && window.location.pathname.indexOf(pages.GAMEPAGE) == -1){
+    setChallengePageState({
+      commandIndex : -1,
+      startTime : null,
+      endTime : null,
+      indexTime : null,
+      keyMap : {}
+    })
+  }
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
       const challengesDict = {};
