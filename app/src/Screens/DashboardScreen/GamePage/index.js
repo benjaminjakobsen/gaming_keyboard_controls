@@ -20,7 +20,7 @@ const countWrongKeys = (keyMap, command) => {
   for(let i = 0; i < command.keyCodes.length; i++) setOfCommandKeys[command.keyCodes[i]] = true;
   let count = 0;
   for(const key in keyMap){
-    if(!setOfCommandKeys[key]) count++;
+    if(keyMap[key] && !setOfCommandKeys[key]) count++;
   }
   return count;
 };
@@ -87,6 +87,7 @@ function GamePage(props){
     setCommandIndex(0);
     setStartTime((new Date()).toISOString());
   }
+  if(command) console.log(countWrongKeys(keyMap, command))
   if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, command) == 0){
     setCommandIndex(commandIndex + 1);
     console.log("command done")
