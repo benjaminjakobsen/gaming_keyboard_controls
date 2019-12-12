@@ -215,25 +215,21 @@ function GamePage(props){
           margin : "auto",
           backgroundColor : "darkgrey",
           top :"25%",
-          left : "45%",
-          height : "16%",
+          left : "0", 
+          right: "0",
           width : "fit-content",
           borderRadius : "10px",
           textAlign : "center",
+          padding : "1vmax"
         }}>
-          <span style ={{
-            position : "absolute",
-            width : "fit-content",
-            height : "fit-content",
-            top : "30%",
-            right : "0",
-            left : "0",
-            bottom : "40%",
-            margin : "auto",
-            fontWeight : "700",
-            fontSize : "2rem",
-          }} dangerouslySetInnerHTML={{__html: challenge.commands[commandIndex].description}}>
-          </span>
+          <div style ={{
+              width : "fit-content",
+              height : "fit-content",
+              fontSize : "2rem",
+            }}>
+            <div dangerouslySetInnerHTML={{__html: challenge.commands[commandIndex].description}}>
+            </div>
+          </div>
           
         </div>}
         {commandIndex == -1 &&
