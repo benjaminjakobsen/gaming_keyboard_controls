@@ -27,6 +27,13 @@ function SidePanel(props){
     }
   }*/
   const user = props.user;
+  let currentOrderingID = -1;
+  for(const orderingID in props.user.challenges){
+    if(props.user.challenges[orderingID].done){
+      currentOrderingID = orderingID;
+      break;
+    }
+  }
   return (
     <div className={"SidePanel-container"}>
       <div><div onClick={() =>{
@@ -44,24 +51,28 @@ function SidePanel(props){
         flex : 0
       }}/>
       <div><div className={"SidePanel-centered-item"}>
-        <Button style={{
+        <Button disabled={currentOrderingID == -1} style={{
           width : "16vw",
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
-          backgroundColor : "#6ee06e",
-          color : "black",
           height : "5vh"
+        }} onClick={() => {
+          history.push(`/dashboard/play/${currentOrderingID}`)
+          props.resetChallengePage()
         }}> Previous challenge</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
-        <Button style={{
+        <Button disabled={!props.user.challenges[Number(currentOrderingID + 1)] && true} style={{
           width : "16vw",
           fontSize : "1.2rem",
           textOverflow: "ellipsis",
           backgroundColor : "#ebed58",
           color : "black",
           height : "5vh"
-        }}> Current challenge</Button>
+        }} onClick={() => {
+          history.push(`/dashboard/play/${Number(currentOrderingID + 1)}`)
+          props.resetChallengePage()
+        }}>Current challenge</Button>
       </div></div>
       <div><div className={"SidePanel-centered-item"}>
         <Button disabled={true} style={{

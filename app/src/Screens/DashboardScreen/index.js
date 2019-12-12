@@ -16,6 +16,11 @@ import ChallengesPage from './ChallengesPage'
 import customFetch from 'services/requests'
 import GamePage from './GamePage'
 
+function returnId(){
+  var Id = window.location.pathname.replace('/dashboard/play/','') 
+  return Id
+}
+
 // like enumerate types
 const pages = {
   CHALLENGES : "challenges",
@@ -35,15 +40,17 @@ function DashBoardScreen(props){
     startTime : null,
     endTime : null,
     indexTime : null,
-    keyMap : {}
+    keyMap : {},
+    challengeID: returnId()
   });
-  if(challengePageState.commandIndex != -1 && window.location.pathname.indexOf(pages.GAMEPAGE) == -1){
+  if(challengePageState.commandIndex != -1 && challengePageState.challengeID !== returnId()){
     setChallengePageState({
       commandIndex : -1,
       startTime : null,
       endTime : null,
       indexTime : null,
-      keyMap : {}
+      keyMap : {},
+      challengeID:  returnId()
     })
   }
   useEffect(() => {
@@ -107,7 +114,16 @@ function DashBoardScreen(props){
         top : "12vh",
         boxShadow: "10px 0px 20px 1px grey"
       }}>
-        <SidePanel user={user} challenges={challenges}/>
+        <SidePanel resetChallengePage={() => {
+          setChallengePageState({
+            commandIndex : -1,
+            startTime : null,
+            endTime : null,
+            indexTime : null,
+            keyMap : {},
+            challengeID : returnId()
+          })
+        }} user={user} challenges={challenges}/>
       </div>
       <div style={{
         backgroundColor : "black",

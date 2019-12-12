@@ -11,8 +11,8 @@ const icons = {
   velkoz : velkoz
 }
 
-function returnId(props){
-  var Id = props.replace('/dashboard/play/','') 
+function returnId(){
+  var Id = window.location.pathname.replace('/dashboard/play/','') 
   return Id
 }
 
@@ -53,8 +53,8 @@ function GamePage(props){
   const endTime = state.endTime;
   const indexTime = state.indexTime;
   const keyMap = state.keyMap;
+  const challengeID = state.challengeID;
 
-  const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
   const userChallenges = props.userChallenges;
   const icon = icons[challenge.champion];
@@ -64,6 +64,7 @@ function GamePage(props){
   const activateTimer ={
     keyCodes : [32]
   }
+
   useEffect(() => {
     window.onkeydown = (e) => {
       if(keyMap[e.keyCode]) return;
@@ -169,7 +170,8 @@ function GamePage(props){
           startTime : null,
           endTime : null,
           indexTime : null,
-          keyMap : {}
+          keyMap : {},
+          challengeID : returnId()
         })
       }}>replay</Button>
     </>
