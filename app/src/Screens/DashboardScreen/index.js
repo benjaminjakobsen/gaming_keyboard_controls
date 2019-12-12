@@ -52,6 +52,7 @@ function DashBoardScreen(props){
       keyMap : {},
       challengeID:  returnId()
     })
+    console.log("set")
   }
   useEffect(() => {
     customFetch("/challenges", {}, (res) => {
@@ -66,6 +67,7 @@ function DashBoardScreen(props){
         ...res.user,
         points : -1
       })
+      console.log("request")
     })
   }, []);
   if(!user || !challenges) return <></>;

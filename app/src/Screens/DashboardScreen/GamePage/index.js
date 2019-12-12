@@ -74,6 +74,9 @@ function GamePage(props){
         keyMap : newKeyMap
       });
     }
+    return () => {
+      window.onkeydown = null;
+    }
   })
   useEffect(() => {
     window.onkeyup = (e) => {
@@ -82,6 +85,9 @@ function GamePage(props){
       setState({
         keyMap : newKeyMap
       });
+    }
+    return () => {
+      window.onkeyup = null;
     }
   })
   useEffect(() => {
