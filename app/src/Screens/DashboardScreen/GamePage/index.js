@@ -38,6 +38,7 @@ function GamePage(props){
   const [commandIndex, setCommandIndex] = useState(-1);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  const [indexTime, setIndexTime] = useState(null);
 
   const challengeID = returnId(window.location.pathname)
   const challenge = props.challenges[challengeID];
@@ -86,10 +87,12 @@ function GamePage(props){
     console.log("started game")
     setCommandIndex(0);
     setStartTime((new Date()).toISOString());
+    setIndexTime((new Date()).toISOString())
   }
   if(command) console.log(countWrongKeys(keyMap, command))
   if(command && checkAllKeys(keyMap, command) && countWrongKeys(keyMap, command) == 0){
     setCommandIndex(commandIndex + 1);
+    setIndexTime((new Date()).toISOString());
     console.log("command done")
   }
   if(commandIndex == challenge.commands.length && !endTime){
@@ -98,22 +101,53 @@ function GamePage(props){
   }
   const totalTime = endTime && startTime ? (new Date(endTime)).getTime() - (new Date(startTime)).getTime() : null;
   console.log(totalTime)
+
+  const checkIndexTime = indexTime != null ? ((new Date().getTime()) - new Date(indexTime).getTime()) : 51;
+  
+  if(totalTime){
+    return (
+      <>
+      {((totalTime < challenge.timeLimitToPass) || (challenge.timeLimitToPass == null)) &&
+      <div>
+        <div style={{textAlign:"center", marginTop : "5vh"}}>
+          <h1>You have completed {challenge.title}</h1>
+        </div>
+        <div style={{textAlign:"center", marginTop : "10vh"}}>
+          <h2 style={{margintop : "10vh"}}>You gained {challenge.points} points</h2>
+          <h2>Your total time was {totalTime}ms</h2>
+        </div>
+      </div>}
+      
+      {((totalTime > challenge.timeLimitToPass) && (challenge.timeLimitToPass != null)) &&
+      <div>
+        <div style={{textAlign:"center", marginTop : "5vh"}}>
+          <h1>You have failed {challenge.title}</h1>
+        </div>
+        <div style={{textAlign:"center", marginTop : "10vh"}}>
+          <h2 style={{margintop : "10vh"}}>You gained 0 points</h2>
+          <h2>Time to beat was {challenge.timeLimitToPass}ms</h2>
+          <h2>Your total time was {totalTime}ms</h2>
+        </div>
+
+      </div>}
+      </>
+
+    )
+  }
+  else{
   return (
     <>
     {challenge.commands.length != commandIndex &&
-      <h1 style={{textAlign :"center", height : "10vh"}}>Welcome to {challenge.title}</h1>
+      <h1 style={{textAlign :"center", height : "10vh", marginTop : "5vh"}}>Welcome to {challenge.title}</h1>
     }
-    {challenge.commands.length == commandIndex &&
-      <h1 style={{textAlign :"center", height : "10vh"}}>You have completed {challenge.title}!</h1>
-    }
-
+    
       <div style={{
         height : "60vh",
         width : "55vw",
         margin : "auto",
         borderRadius : "20px",
         overflow : "hidden",
-        boxShadow : "0px 0px 10px 2px black",
+        boxShadow : checkIndexTime > 50 && ((command && countWrongKeys(keyMap, command) > 0) || (commandIndex == -1 && countWrongKeys(keyMap, activateTimer) > 0)) ? "0px 0px 10px 2px red" : "0px 0px 10px 2px black",
         position : "relative"
       }}>
         <img src={background} style={{
@@ -202,6 +236,7 @@ function GamePage(props){
         }
       </div>
     </>)
+  }
 }
 
 export default GamePage;
