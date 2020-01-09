@@ -1,6 +1,6 @@
 # gaming keyboard controls: LoL combo trainer
 
-## Installation
+## Installation og kørsel
 * Installér mongodb
     * Download version 4.2.2 fra https://www.mongodb.com/download-center/community til dit styresystem.
     * Kør installeren og benyt default configurationen.
