@@ -8,11 +8,10 @@
     * Download installer fra https://nodejs.org/en/
     * Kør installeren og benyt default configurationen.
 * Installér yarn
-    * Windows
-        * Download installer fra 
-            * Windows: https://yarnpkg.com/lang/en/docs/install/#windows-stable
-            * Mac: https://yarnpkg.com/lang/en/docs/install/#mac-stable
-        * Kør installeren og benyt default configurationen.
+    * Download installer fra 
+        * Windows: https://yarnpkg.com/lang/en/docs/install/#windows-stable
+        * Mac: https://yarnpkg.com/lang/en/docs/install/#mac-stable
+    * Kør installeren og benyt default configurationen.
 * Installér git, hvis det ikke er installeret i forvejen https://git-scm.com/downloads - benyt default configuration.
 * Clone frontend og backend repositories med følgende git commands i en terminal.
     * `git clone https://github.com/PointingMan/gaming_keyboard_controls.git`
